@@ -1,0 +1,317 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+
+
+}
+
+.boot__title {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  opacity: 0;
+  will-change: transform;
+
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0;
+  align-items: flex-start;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.5vw, 72px);
+  font-weight: 700;
+  letter-spacing: var(--ls-display);
+  line-height: 1.06;
+  color: var(--navy);
+}
+
+
+
+
+
+
+
+
+
+
+.boot__word {
+  display: block;
+  overflow: hidden;
+  padding: 0.2em 0 0.08em;
+  margin: -0.2em 0 -0.08em;
+  white-space: pre;
+}
+.boot__word-in {
+  display: block;
+  transform: translateY(132%);
+  will-change: transform;
+}
+
+
+
+
+
+
+.boot__canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  opacity: 0;
+  will-change: transform;
+  --n8n-node: #FFFFFF;
+  --n8n-border: #C9CBD3;
+  --n8n-cable: #B4B7C0;
+  --n8n-ok: #22A15C;
+  --n8n-ink: var(--navy);
+}
+[data-theme='dark'] .boot__canvas {
+  --n8n-node: #414244;
+  --n8n-border: #5E5F63;
+  --n8n-cable: #6B6D73;
+  --n8n-ok: #3DBA74;
+  --n8n-ink: #EDF0F6;
+}
+
+.boot__cables {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+}
+.boot__cable {
+  fill: none;
+  stroke: var(--n8n-cable);
+  stroke-width: 2;
+  stroke-linecap: round;
+  opacity: 0;
+}
+.boot__cable--live {
+  stroke: var(--orange);
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(255, 122, 26, 0.45));
+}
+
+.boot__n {
+  position: absolute;
+  width: 40px;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.boot__n-card {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+  background: var(--n8n-node);
+  border: 1.5px solid var(--n8n-border);
+  color: var(--n8n-ink);
+  box-shadow: 0 6px 14px -8px rgba(6, 12, 26, 0.35);
+  transition: border-color 260ms var(--ease-out);
+}
+
+.boot__n--trigger .boot__n-card {
+  border-radius: 20px 9px 9px 20px;
+}
+.boot__n.is-done .boot__n-card { border-color: var(--n8n-ok); }
+
+.boot__n-port {
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--n8n-node);
+  border: 1.5px solid var(--n8n-border);
+  transform: translateY(-50%);
+}
+.boot__n-port--in  { left: -5px; }
+.boot__n-port--out { right: -5px; }
+.boot__n--trigger .boot__n-port--in { display: none; }
+.boot__n:last-of-type .boot__n-port--out { display: none; }
+.boot__n.is-done .boot__n-port { border-color: var(--n8n-ok); }
+
+.boot__n-check {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: grid;
+  place-items: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--n8n-ok);
+  color: #fff;
+  box-shadow: 0 0 0 2px var(--n8n-node);
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+.boot__n-label {
+  position: absolute;
+  top: 46px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--n8n-ink);
+}
+
+
+.boot__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  will-change: transform;
+}
+.boot__dot-core {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-circle);
+  background: var(--orange);
+  box-shadow: 0 0 0 3px rgba(255, 122, 26, 0.18), 0 0 12px 2px rgba(255, 122, 26, 0.6);
+  opacity: 0;
+}
+
+
+.boot__status {
+  position: absolute;
+  left: 0;
+  top: 82px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  opacity: 0;
+}
+.boot__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: boot-pulse 900ms ease-in-out infinite;
+}
+.boot__status.is-done { color: var(--n8n-ok); }
+.boot__status.is-done .boot__status-dot { background: var(--n8n-ok); animation: none; }
+@keyframes boot-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.6); opacity: 0.5; }
+}
+
+
+
+
+
+html.is-intro-head .home__title { opacity: 0; }
+
+html.is-intro .home__cta,
+html.is-intro .home__lede,
+html.is-intro .home__glass,
+html.is-intro .nav,
+html.is-intro .hprofile,
+html.is-intro .hstats,
+html.is-intro .hsec,
+html.is-intro .htiles,
+html.is-intro .hproof,
+html.is-intro .tabbar {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+html.is-intro .tabbar { transform: translateY(24px); }
+
+.home__cta,
+.home__lede,
+.home__glass,
+.nav,
+.hprofile,
+.hstats,
+.hsec,
+.htiles,
+.hproof,
+.tabbar {
+  transition:
+    opacity 620ms var(--ease-out),
+    transform 760ms var(--ease-out);
+}
+.home__lede { transition-delay: 60ms; }
+.home__glass { transition-delay: 150ms; }
+.hstats { transition-delay: 100ms; }
+.hsec, .htiles, .hproof { transition-delay: 220ms; }
+.tabbar { transition-delay: 260ms; }
+
+
+
+
+html.is-intro .rail__inner > * {
+  opacity: 0;
+  transform: translateX(-16px);
+}
+.rail__inner > * {
+  transition:
+    opacity 560ms var(--ease-out),
+    transform 700ms var(--ease-out);
+}
+.rail__inner > *:nth-child(1) { transition-delay: 40ms; }
+.rail__inner > *:nth-child(2) { transition-delay: 95ms; }
+.rail__inner > *:nth-child(3) { transition-delay: 140ms; }
+.rail__inner > *:nth-child(4) { transition-delay: 190ms; }
+.rail__inner > *:nth-child(5) { transition-delay: 240ms; }
+.rail__inner > *:nth-child(6) { transition-delay: 300ms; }
+.rail__inner > *:nth-child(7) { transition-delay: 350ms; }
+
+@media (min-width: 1100px) {
+  .boot__title { white-space: nowrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot { display: none; }
+  html.is-intro-head .home__title,
+  html.is-intro .home__cta,
+  html.is-intro .home__lede,
+  html.is-intro .home__glass,
+  html.is-intro .nav,
+    html.is-intro .hprofile,
+  html.is-intro .hstats,
+  html.is-intro .hsec,
+  html.is-intro .htiles,
+  html.is-intro .hproof,
+  html.is-intro .tabbar,
+  html.is-intro .rail__inner > * {
+    opacity: 1;
+    transform: none;
+  }
+}

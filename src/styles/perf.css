@@ -1,0 +1,29 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:root[data-perf='mid'] *,
+:root[data-perf='low'] *,
+:root[data-perf='mid'] *::before,
+:root[data-perf='low'] *::before,
+:root[data-perf='mid'] *::after,
+:root[data-perf='low'] *::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+
+
+:root[data-perf='low'] .hero-canvas {
+  display: none;
+}
