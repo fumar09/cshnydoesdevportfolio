@@ -334,12 +334,9 @@ export default function IntroOverlay() {
         play(title, [{ opacity: 1 }, { opacity: 0 }], { duration: 420, easing: EASE_OUT })
       }
 
-      await wait(FLY - 150)
+      await wait(FLY)
       if (cancelled) return
       release()
-
-      await wait(150)
-      if (cancelled) return
       releaseHead()
       setGone(true)
     }

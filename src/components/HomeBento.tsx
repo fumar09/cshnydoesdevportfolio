@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, EnvelopeSimple, FolderOpen, GraduationCap, SealCheck, User, Wrench } from '@/components/slab'
-import { credentials, education, portfolioProjects, skillGroups } from '@/data/portfolio'
+import { ArrowUpRight, EnvelopeSimple, FolderOpen, GraduationCap, Quotes, User, Wrench } from '@/components/slab'
+import { education, portfolioProjects, skillGroups } from '@/data/portfolio'
 import { profile } from '@/data/profile'
 
 const sections = [
@@ -37,11 +37,11 @@ const sections = [
     Icon: GraduationCap,
   },
   {
-    to: '/credentials',
-    label: 'Credentials',
-    title: 'Learning, made tangible.',
-    detail: credentials[0].title,
-    Icon: SealCheck,
+    to: '/testimonials',
+    label: 'Testimonials',
+    title: 'Client feedback.',
+    detail: 'Video testimonials will be added here soon.',
+    Icon: Quotes,
   },
   {
     to: '/contact',

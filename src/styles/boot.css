@@ -246,7 +246,9 @@ html.is-intro .hstats,
 html.is-intro .hsec,
 html.is-intro .htiles,
 html.is-intro .hproof,
-html.is-intro .tabbar {
+html.is-intro .tabbar,
+html.is-intro .portfolio-home-grid,
+html.is-intro .portfolio-mobile-tiles {
   opacity: 0;
   transform: translateY(14px);
 }
@@ -262,7 +264,9 @@ html.is-intro .tabbar { transform: translateY(24px); }
 .hsec,
 .htiles,
 .hproof,
-.tabbar {
+.tabbar,
+.portfolio-home-grid,
+.portfolio-mobile-tiles {
   transition:
     opacity 620ms var(--ease-out),
     transform 760ms var(--ease-out);
@@ -310,6 +314,8 @@ html.is-intro .rail__inner > * {
   html.is-intro .htiles,
   html.is-intro .hproof,
   html.is-intro .tabbar,
+  html.is-intro .portfolio-home-grid,
+  html.is-intro .portfolio-mobile-tiles,
   html.is-intro .rail__inner > * {
     opacity: 1;
     transform: none;

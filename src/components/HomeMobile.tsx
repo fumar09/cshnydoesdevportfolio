@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, Briefcase, Certificate, FolderOpen, GraduationCap, User, Wrench } from '@/components/slab'
+import { ArrowUpRight, Briefcase, Certificate, FolderOpen, GraduationCap, Quotes, User, Wrench } from '@/components/slab'
 import { profile } from '@/data/profile'
 import { portfolioProjects } from '@/data/portfolio'
 import QuickMenu from './QuickMenu'
@@ -37,6 +37,7 @@ const tiles = [
   { label: 'Skills', to: '/services', title: 'Design and technology', description: 'UI/UX, web applications, IT support, and visual design.', Icon: Wrench },
   { label: 'Education', to: '/showcase', title: 'Web application development', description: 'A foundation in information technology and design.', Icon: GraduationCap },
   { label: 'Credentials', to: '/credentials', title: 'Learning, made tangible', description: 'Google UX Design and TESDA certifications.', Icon: Certificate },
+  { label: 'Testimonials', to: '/testimonials', title: 'Client feedback', description: 'Video testimonials will be added here soon.', Icon: Quotes },
   { label: 'About', to: '/about', title: `Hi, I’m ${profile.firstName}.`, description: 'Based in Alcantara, Romblon, Philippines.', Icon: User, image: profile.avatarSrc },
 ]
 

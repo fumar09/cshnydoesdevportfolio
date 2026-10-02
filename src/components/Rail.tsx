@@ -8,6 +8,7 @@ import {
   StackIcon,
   CupIcon,
   StarIcon,
+  QuotesIcon,
   UserIcon,
   MessageIcon,
 } from './RailIcons'
@@ -31,6 +32,7 @@ export const RAIL_LINKS = [
   { label: 'Skills', to: '/services', Icon: StackIcon },
   { label: 'Education', to: '/showcase', Icon: CupIcon },
   { label: 'Credentials', to: '/credentials', Icon: StarIcon },
+  { label: 'Testimonials', to: '/testimonials', Icon: QuotesIcon },
   { label: 'About', to: '/about', Icon: UserIcon },
   { label: 'Contact', to: '/contact', Icon: MessageIcon },
 ] as const
