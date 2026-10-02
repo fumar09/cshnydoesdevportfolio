@@ -1,47 +1,25 @@
-import Flagship from '@/components/Flagship'
-
-
-
-
-
-
-
-
+import { education } from '@/data/portfolio'
 
 export default function ShowcaseGrid() {
   return (
-    <section className="pgrid ktools" aria-labelledby="showcase-title">
-      <header className="pgrid__head ktools__head">
-        <div className="ktools__head-copy">
-          <span className="pgrid__eyebrow">Showcase</span>
-          <h1 className="pgrid__title" id="showcase-title">
-            Your flagship product, and the people using it.
-          </h1>
-          <p className="pgrid__lede">
-            PLACEHOLDER - tell me what to put here: one line on what this product is and why a visitor should look at it.
-          </p>
-        </div>
-
-        {
-
-}
-        <div className="ktools__vote">
-          <p className="ktools__vote-label">
-            Featured on
-            <span aria-hidden="true" className="ktools__vote-dot" />
-            <span className="ktools__vote-ask">Placeholder</span>
-          </p>
-          <a className="ktools__vote-frame ktools__vote-card" href="#">
-            <img src="/placeholders/badge.svg" alt="" width="48" height="48" />
-            <span className="ktools__vote-text">
-              PLACEHOLDER - a badge, award or launch link
-            </span>
-          </a>
-        </div>
+    <section className="pgrid portfolio-page" aria-labelledby="education-title">
+      <header className="pgrid__head">
+        <span className="pgrid__eyebrow">Education</span>
+        <h1 className="pgrid__title" id="education-title">Building a foundation in web applications.</h1>
+        <p className="pgrid__lede">Formal studies in web application development, alongside senior high school in Leyte.</p>
       </header>
 
-      <div className="home__glass ktools__glass">
-        <Flagship eyebrow="Flagship build" />
+      <div className="portfolio-education-list">
+        {education.map((entry, index) => (
+          <article key={entry.school} className={`portfolio-education-card${index === 0 ? ' portfolio-education-card--current' : ''}`}>
+            <span className="portfolio-education-card__number">{String(index + 1).padStart(2, '0')}</span>
+            <div className="portfolio-education-card__period">{entry.period}<span>{entry.location}</span></div>
+            <div className="portfolio-education-card__copy">
+              <h2>{entry.school}</h2>
+              <p>{entry.program}</p>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   )

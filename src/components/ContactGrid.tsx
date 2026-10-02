@@ -1,208 +1,49 @@
-import { useState, type FormEvent } from 'react'
-import { PaperPlaneTilt, CheckCircle, WarningCircle, EnvelopeSimple, ArrowUpRight, CaretDown } from '@/components/slab'
-import { FAQS } from '@/data/faqs'
+import { ArrowUpRight, EnvelopeSimple, MapPin, Phone } from '@/components/slab'
 import { profile } from '@/data/profile'
-import { readLead, submitLead, SubmitError, MAX_NAME, MAX_EMAIL, MAX_MESSAGE, type SubmitResult } from '@/lib/contact'
+import { resumeHref } from '@/data/portfolio'
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-type Status = { kind: 'idle' } | { kind: 'sending' } | { kind: 'error'; note: string } | { kind: 'sent'; via: SubmitResult['via'] }
-
-
-
-
-const FLIGHT_MS = 650
-
-const wait = (ms: number) => new Promise<void>((r) => setTimeout(r, ms))
+const phoneHref = `tel:${profile.phone.replace(/\s/g, '')}`
 
 export default function ContactGrid() {
-  const [status, setStatus] = useState<Status>({ kind: 'idle' })
-
-
-  const [shake, setShake] = useState(0)
-
-  const [openFaq, setOpenFaq] = useState<number | null>(0)
-
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const lead = readLead(new FormData(e.currentTarget))
-    if (!lead) {
-      setStatus({ kind: 'error', note: 'Add your name, a real email, and a short note.' })
-      setShake((n) => n + 1)
-      return
-    }
-    setStatus({ kind: 'sending' })
-    try {
-      const [result] = await Promise.all([submitLead(lead), wait(FLIGHT_MS)])
-      setStatus({ kind: 'sent', via: result.via })
-    } catch (err) {
-      const note = err instanceof SubmitError ? err.message : 'That did not go through. Email me directly instead.'
-      setStatus({ kind: 'error', note })
-      setShake((n) => n + 1)
-    }
-  }
-
-  const busy = status.kind === 'sending'
-
   return (
-    <section className="pgrid cgrid" aria-labelledby="contact-title">
+    <section className="pgrid portfolio-page" aria-labelledby="contact-title">
       <header className="pgrid__head">
-        <span className="pgrid__eyebrow">FAQs / Contact</span>
-        <h1 className="pgrid__title" id="contact-title">
-          Your contact headline goes here.
-        </h1>
-        <p className="pgrid__lede">
-          PLACEHOLDER - tell me what to put here: one or two lines inviting people to write and saying what they get back.
-        </p>
+        <span className="pgrid__eyebrow">Get in touch</span>
+        <h1 className="pgrid__title" id="contact-title">Have something in mind?</h1>
+        <p className="pgrid__lede">Based in {profile.location}. Contact me about IT support, web applications, or UI/UX design.</p>
       </header>
 
-      <div className="home__glass cgrid__glass">
-        { }
-        <aside className="cgrid__aside" aria-labelledby="contact-faq">
-          <div className="cgrid__aside-head">
-            <span className="cgrid__eyebrow">FAQs</span>
-            <h2 className="cgrid__aside-title" id="contact-faq">
-              Quick answers.
-              <br />
-              <span>Still have one? Write below.</span>
-            </h2>
+      <div className="portfolio-contact-layout">
+        <section className="portfolio-panel portfolio-contact-card">
+          <div className="portfolio-panel__eyebrow">Let’s make it make sense.</div>
+          <h2>I’m open to IT support and web opportunities.</h2>
+          <p>Reach out by email, phone, or social media. I’d be glad to hear what you’re working on.</p>
+          <div className="portfolio-contact-details">
+            <a href={`mailto:${profile.email}`}><EnvelopeSimple size={19} weight="duotone" aria-hidden="true" /><span>{profile.email}</span><ArrowUpRight size={15} weight="bold" aria-hidden="true" /></a>
+            <a href={phoneHref}><Phone size={19} weight="duotone" aria-hidden="true" /><span>{profile.phone}</span><ArrowUpRight size={15} weight="bold" aria-hidden="true" /></a>
+            <span><MapPin size={19} weight="duotone" aria-hidden="true" /><span>{profile.location}</span></span>
           </div>
+        </section>
 
-          <ul className="cgrid__faqs" role="list">
-            {FAQS.map((f, i) => {
-              const isOpen = openFaq === i
-              return (
-                <li key={f.q} className={`cgrid__faq${isOpen ? ' is-open' : ''}`}>
-                  <button
-                    type="button"
-                    className="cgrid__faq-q"
-                    onClick={() => setOpenFaq(isOpen ? null : i)}
-                    aria-expanded={isOpen}
-                    aria-controls={`cfaq-${i}`}
-                  >
-                    <span className="cgrid__step-index" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-                    <span className="cgrid__faq-text">{f.q}</span>
-                    <CaretDown size={14} weight="bold" className="cgrid__faq-caret" aria-hidden="true" />
-                  </button>
-                  <div className="cgrid__faq-a" id={`cfaq-${i}`} hidden={!isOpen}>
-                    <p>{f.a}</p>
-                  </div>
-                </li>
-              )
-            })}
+        <section className="portfolio-panel portfolio-contact-links" aria-labelledby="connect-title">
+          <div className="portfolio-panel__eyebrow">Connect</div>
+          <h2 id="connect-title">Find me online.</h2>
+          <ul className="portfolio-social-list" role="list">
+            {profile.socials.map((social) => (
+              <li key={social.label}>
+                <a href={social.href} target="_blank" rel="noopener noreferrer">
+                  <img src={social.iconPath} alt="" width={22} height={22} />
+                  <span>{social.label.replace(' profile', '')}</span>
+                  <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
+                </a>
+              </li>
+            ))}
           </ul>
-
-          <div className="cgrid__direct">
-            <a className="cgrid__mail" href={`mailto:${profile.email}`}>
-              <EnvelopeSimple size={16} weight="fill" aria-hidden="true" />
-              <span>{profile.email}</span>
-            </a>
-            <ul className="cgrid__socials" role="list">
-              {profile.socials.map((s) => (
-                <li key={s.label}>
-                  <a className="cgrid__social" href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
-                    <img src={s.iconPath} alt="" loading="lazy" decoding="async" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </aside>
-
-        { }
-        <div className="cgrid__panel">
-          {status.kind === 'sent' ? (
-            <div className="cgrid__done" role="status">
-              <span className="cgrid__done-mark" aria-hidden="true">
-                <CheckCircle size={30} weight="fill" />
-              </span>
-              <h2 className="cgrid__done-title">
-                {status.via === 'webhook' ? 'Got it.' : 'Your mail app has it.'}
-              </h2>
-              <p className="cgrid__done-body">
-                {status.via === 'webhook'
-                  ? 'It is in my inbox and on my phone. You will hear back within one business day.'
-                  : 'The message is laid out and addressed. Press send there and you will hear back within one business day.'}
-              </p>
-              <button type="button" className="cgrid__again" onClick={() => setStatus({ kind: 'idle' })}>
-                Write another
-              </button>
-            </div>
-          ) : (
-            <form className={`cgrid__form${busy ? ' is-sending' : ''}`} onSubmit={onSubmit} noValidate>
-              {
-
-}
-              <input
-                type="text"
-                name="website"
-                tabIndex={-1}
-                autoComplete="off"
-                aria-hidden="true"
-                className="cgrid__trap"
-              />
-              <div className="cgrid__row">
-                <label className="cgrid__field">
-                  <span className="cgrid__label">First name</span>
-                  <input type="text" name="firstName" autoComplete="given-name" required maxLength={MAX_NAME} placeholder="First name" />
-                </label>
-                <label className="cgrid__field">
-                  <span className="cgrid__label">Last name</span>
-                  <input type="text" name="lastName" autoComplete="family-name" required maxLength={MAX_NAME} placeholder="Last name" />
-                </label>
-              </div>
-
-              <label className="cgrid__field">
-                <span className="cgrid__label">Email</span>
-                <input type="email" name="email" autoComplete="email" required maxLength={MAX_EMAIL} placeholder="you@yourbusiness.com" />
-              </label>
-
-              <label className="cgrid__field cgrid__field--grow">
-                <span className="cgrid__label">Tell me more about your business</span>
-                <textarea
-                  name="message"
-                  required
-                  maxLength={MAX_MESSAGE}
-                  placeholder="What do you need help with? What are you working with today?"
-                />
-              </label>
-
-              <div className="cgrid__actions">
-                <button
-                  key={shake}
-                  type="submit"
-                  className={`cgrid__submit${busy ? ' is-sending' : ''}${status.kind === 'error' ? ' is-shaking' : ''}`}
-                  disabled={busy}
-                >
-                  <span className="cgrid__submit-plane" aria-hidden="true">
-                    <PaperPlaneTilt size={17} weight="fill" />
-                  </span>
-                  <span className="cgrid__submit-label">{busy ? 'Sending' : 'Send message'}</span>
-                  <ArrowUpRight className="cgrid__submit-arrow" size={15} weight="bold" aria-hidden="true" />
-                </button>
-                {status.kind === 'error' ? (
-                  <span className="cgrid__status" role="alert">
-                    <WarningCircle size={16} weight="fill" aria-hidden="true" />
-                    {status.note}
-                  </span>
-                ) : (
-                  <span className="cgrid__hint">Short reassurance line, e.g. your reply time.</span>
-                )}
-              </div>
-            </form>
-          )}
-        </div>
+          <a className="portfolio-resume-link" href={resumeHref} target="_blank" rel="noopener noreferrer">
+            <span><strong>Resume</strong><small>View or download my PDF resume</small></span>
+            <ArrowUpRight size={18} weight="bold" aria-hidden="true" />
+          </a>
+        </section>
       </div>
     </section>
   )

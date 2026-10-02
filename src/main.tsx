@@ -7,22 +7,15 @@ import NotFound from '@/components/NotFound'
 import { restorePerfTier } from '@/lib/perf'
 import { restorePrefs } from '@/lib/a11y'
 
-
 const ProjectsView = lazy(() => import('@/views/ProjectsView'))
 const ServicesView = lazy(() => import('@/views/ServicesView'))
 const ShowcaseView = lazy(() => import('@/views/ShowcaseView'))
-const TestimonialsGrid = lazy(() => import('@/components/TestimonialsGrid'))
+const CredentialsGrid = lazy(() => import('@/components/TestimonialsGrid'))
 const AboutGrid = lazy(() => import('@/components/AboutGrid'))
 const ContactGrid = lazy(() => import('@/components/ContactGrid'))
-const Privacy = lazy(() => import('@/components/Privacy'))
-const ToS = lazy(() => import('@/components/ToS'))
-const ThankYou = lazy(() => import('@/components/ThankYou'))
 import './styles/tokens.css'
 import './styles/global.css'
 import './styles/theme-glyph.css'
-
-
-
 import './styles/sections.css'
 import './styles/extensions.css'
 import './styles/ai-stack.css'
@@ -41,12 +34,10 @@ import './styles/credentials.css'
 import './styles/testimonials.css'
 import './styles/mobile-app.css'
 import './styles/a11y.css'
-
 import './styles/apple.css'
-
 import './styles/mobile-pass.css'
-
 import './styles/perf.css'
+import './styles/portfolio.css'
 
 
 
@@ -60,21 +51,15 @@ createRoot(container).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        {
-}
         <Route element={<App />}>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<ProjectsView />} />
           <Route path="/services" element={<ServicesView />} />
           <Route path="/showcase" element={<ShowcaseView />} />
-          <Route path="/testimonials" element={<TestimonialsGrid />} />
+          <Route path="/credentials" element={<CredentialsGrid />} />
           <Route path="/about" element={<AboutGrid />} />
           <Route path="/contact" element={<ContactGrid />} />
         </Route>
-        { }
-        <Route path="/privacy" element={<Suspense fallback={null}><Privacy /></Suspense>} />
-        <Route path="/terms" element={<Suspense fallback={null}><ToS /></Suspense>} />
-        <Route path="/thank-you" element={<Suspense fallback={null}><ThankYou /></Suspense>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

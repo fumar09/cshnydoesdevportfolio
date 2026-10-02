@@ -1,16 +1,4 @@
-
-
-
-
-
-
-
-
-
-
-
-
-import { Briefcase, SealCheck, Clock, type Icon } from '@/components/slab'
+import { Briefcase, SealCheck, UsersThree, type Icon } from '@/components/slab'
 
 export type SocialLink = {
   label: string
@@ -18,23 +6,18 @@ export type SocialLink = {
   iconPath: string
 }
 
-
 export type Stat = { value: string; label: string; Icon: Icon }
 
 export type Profile = {
   name: string
-
   firstName: string
   handle: string
-
   role: string
-
   avatarSrc: string
-
   verifiedLabel: string
   email: string
+  phone: string
   location: string
-
   stats: Stat[]
   displayName: { line1: string; line2: string }
   hero: {
@@ -46,31 +29,28 @@ export type Profile = {
 }
 
 export const profile: Profile = {
-  name: 'Your Name',
-  firstName: 'Your Name',
-  handle: '@yourhandle',
-  role: 'PLACEHOLDER - your title',
-  avatarSrc: '/avatar.svg',
-  verifiedLabel: 'PLACEHOLDER - what the tick means (e.g. a certification)',
-  email: 'you@example.com',
-  location: 'PLACEHOLDER - your city or timezone',
-
+  name: 'Connie Frances Fumar',
+  firstName: 'Connie',
+  handle: '@itsyourcasheny',
+  role: 'Junior IT Support & UI/UX Designer',
+  avatarSrc: '/images/profile.jpg',
+  verifiedLabel: 'TESDA National Certificate II in Computer Systems Servicing',
+  email: 'conniefrancesfumarjobapplicant@gmail.com',
+  phone: '+63 966 217 6103',
+  location: 'Alcantara, Romblon, Philippines',
   stats: [
-    { value: '0 yrs', label: 'PLACEHOLDER', Icon: Briefcase },
-    { value: '#000', label: 'PLACEHOLDER', Icon: SealCheck },
-    { value: 'GMT+0', label: 'PLACEHOLDER', Icon: Clock },
+    { value: '4', label: 'Featured projects', Icon: Briefcase },
+    { value: '3', label: 'Certifications', Icon: SealCheck },
+    { value: '2', label: 'Community groups', Icon: UsersThree },
   ],
-
-
-  displayName: { line1: 'Your headline here.', line2: 'Keep it short.' },
+  displayName: { line1: 'Technology should feel', line2: 'human.' },
   hero: {
-    body: 'PLACEHOLDER - one line on what you do and who you do it for.',
-    portraitSrc: '/avatar.svg',
-    portraitAlt: 'Portrait placeholder',
+    body: 'I’m Connie, an early-career IT Assistant and Junior IT Support professional focused on technical support, web application development, and user-centered design. I bring clear customer communication and practical problem-solving to better user experiences.',
+    portraitSrc: '/images/profile.jpg',
+    portraitAlt: 'Portrait of Connie Frances Fumar',
   },
   socials: [
-    { label: 'Facebook profile', href: '#', iconPath: '/icons/facebook.svg' },
-    { label: 'LinkedIn profile', href: '#', iconPath: '/icons/linkedin.svg' },
-    { label: 'Discord profile', href: '#', iconPath: '/icons/discord.svg' },
+    { label: 'Facebook profile', href: 'https://web.facebook.com/itsyourdawgcashyy/', iconPath: '/icons/facebook.svg' },
+    { label: 'Instagram profile', href: 'https://www.instagram.com/itsyourcasheny/', iconPath: '/icons/instagram.svg' },
   ],
 }

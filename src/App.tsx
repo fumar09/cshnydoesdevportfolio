@@ -31,7 +31,7 @@ export default function App() {
   useLenis()
 
   const { pathname } = useLocation()
-  const FIXED_ROUTES = ['/', '/projects', '/testimonials', '/about', '/contact']
+  const FIXED_ROUTES = ['/', '/projects', '/credentials', '/about', '/contact']
   const isFixed = FIXED_ROUTES.includes(pathname)
 
 
