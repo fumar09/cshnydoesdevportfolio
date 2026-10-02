@@ -1,4 +1,5 @@
 import { lazy, Suspense, useState, useEffect, useLayoutEffect, useRef } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import { Outlet, useLocation } from 'react-router-dom'
 import TabBar from '@/components/TabBar'
 import QuickMenu from '@/components/QuickMenu'
@@ -118,6 +119,7 @@ export default function App() {
       </div>
       {phone && <TabBar />}
       <AccessMenu />
+      <Analytics />
     </>
   )
 }
