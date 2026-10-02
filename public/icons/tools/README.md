@@ -8,5 +8,7 @@
 - ChatGPT reuses the OpenAI symbol already in `public/icons/openai.svg`.
 - The Google Workspace logo is reused from `public/icons/googleworkspace.svg`.
 - VS Code and Cursor reuse `public/icons/vscode.svg` and `public/icons/cursor.svg`.
+- Netlify, Vercel, Supabase, GoDaddy, Gemini, InfinityFree, XAMPP, and Microsoft Excel use SVG marks from [Simple Icons](https://github.com/simple-icons/simple-icons). GitHub and Namecheap reuse the icons in `public/icons/ai`.
+- Web scraping uses a generic locally drawn globe mark because it describes a practice rather than a specific product.
 
 These marks identify the tools shown in the portfolio. The respective brand owners retain their trademarks.

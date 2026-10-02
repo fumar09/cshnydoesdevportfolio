@@ -8,6 +8,18 @@ On Windows, double-click [`start.bat`](start.bat). It starts the local site and 
 
 Node.js 18.18 or newer must be installed. The launcher installs the project's locked dependencies automatically if they are missing, so you do not need to type an npm command.
 
+## Portfolio assistant
+
+The floating assistant uses a Vercel serverless function and Gemini with Google Search grounding. The API key stays on the server and must never use a `VITE_` variable.
+
+1. Revoke any Gemini key that has been shared publicly, then create a replacement in Google AI Studio.
+2. For local use, copy `.env.example` to `.env` and set `GEMINI_API_KEY` to the replacement key. `.env` is ignored by Git. Start the app with `start.bat`; Vite serves the local `/api/chat` endpoint.
+3. In Vercel project settings, add `GEMINI_API_KEY` as an Environment Variable for Production and Preview, then redeploy.
+
+The assistant answers general questions, searches the web, and describes Connie's portfolio, tools, and technology stack. It declines source-code and coding requests. Its in-memory request limit helps reduce accidental bursts; set an appropriate Gemini API quota in Google AI Studio for production use.
+
+The assistant API is served at `/api/chat`, so it works when this repository is deployed on Vercel. A static GitHub Pages deployment does not run this server function.
+
 ## Portfolio content
 
 - **Projects:** E-Barangay ni Kap, ARCHIVIA, Romantic Music Player, and ResuMay!

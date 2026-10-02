@@ -7,6 +7,7 @@ import Rail from '@/components/Rail'
 import IntroOverlay from '@/components/IntroOverlay'
 import CursorRing from '@/components/CursorRing'
 import AccessMenu from '@/components/AccessMenu'
+import PortfolioBot from '@/components/PortfolioBot'
 import { motionReduced } from '@/lib/a11y'
 import { useLenis, SCROLLER_ID } from '@/hooks/useLenis'
 import { useIsPhone } from '@/hooks/useMediaQuery'
@@ -119,6 +120,7 @@ export default function App() {
       </div>
       {phone && <TabBar />}
       <AccessMenu />
+      <PortfolioBot />
       <Analytics />
     </>
   )

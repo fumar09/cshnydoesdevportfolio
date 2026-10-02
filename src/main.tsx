@@ -40,6 +40,7 @@ import './styles/apple.css'
 import './styles/mobile-pass.css'
 import './styles/perf.css'
 import './styles/portfolio.css'
+import './styles/portfolio-bot.css'
 
 
 
