@@ -60,23 +60,36 @@ export default function Rail() {
 
         <div className="rail__actions">
           <ul className="rail__socials" role="list" aria-label="Social profiles">
-          {profile.socials.map(({ label, href, iconPath }) => (
+          {profile.socials.map(({ label, href, iconPath, status }) => (
             <li key={label}>
-              <a
-                className="rail__social"
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-              >
-                {
-}
+              {href ? (
+                <a
+                  className="rail__social"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                >
+                  <span
+                    className="rail__social-icon"
+                    style={{ ['--icon-url' as string]: `url('${iconPath}')` }}
+                    aria-hidden="true"
+                  />
+                </a>
+              ) : (
                 <span
-                  className="rail__social-icon"
-                  style={{ ['--icon-url' as string]: `url('${iconPath}')` }}
-                  aria-hidden="true"
-                />
-              </a>
+                  className="rail__social rail__social--soon"
+                  role="img"
+                  aria-label={`${label}, ${status ?? 'Coming soon'}`}
+                  title={`${label}, ${status ?? 'Coming soon'}`}
+                >
+                  <span
+                    className="rail__social-icon"
+                    style={{ ['--icon-url' as string]: `url('${iconPath}')` }}
+                    aria-hidden="true"
+                  />
+                </span>
+              )}
               </li>
             ))}
           </ul>

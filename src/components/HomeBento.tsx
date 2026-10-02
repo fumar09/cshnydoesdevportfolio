@@ -14,24 +14,12 @@ import {
   type Icon,
 } from '@/components/slab'
 import { credentials, portfolioProjects } from '@/data/portfolio'
+import { tools } from '@/data/tools'
 import ProfileImages from './ProfileImages'
 
 const PHOTOS = [0, 1, 2]
 
-const TOOL_ROWS = [
-  [
-    { name: 'Figma', Icon: SealCheck },
-    { name: 'HTML & CSS', Icon: Stack },
-    { name: 'JavaScript', Icon: Stack },
-    { name: 'Responsive UI', Icon: User },
-  ],
-  [
-    { name: 'Google Workspace', Icon: Briefcase },
-    { name: 'Microsoft 365', Icon: Briefcase },
-    { name: 'Technical support', Icon: Wrench },
-    { name: 'Hardware troubleshooting', Icon: Wrench },
-  ],
-]
+const TOOL_ROWS = [tools.slice(0, 3), tools.slice(3)]
 
 const STRENGTHS = [
   { Icon: Stack, title: 'UI/UX and visual design', note: 'Figma and user-centered layouts' },
@@ -84,14 +72,14 @@ export default function HomeBento() {
       </Link>
 
       <Link to="/services" className="bento__card bento__card--ai">
-        <CardHead Icon={Wrench} title="Skills & tools" desc="Figma, web technologies, Google Workspace, and practical IT support." />
+        <CardHead Icon={Wrench} title="Tools I use" desc="Figma, Google Workspace, Microsoft 365, HTML, CSS, and JavaScript." />
         <div className="bento__media bento__chips" aria-hidden="true">
           {TOOL_ROWS.map((row, rowIndex) => (
             <div key={rowIndex} className="bento__chip-row" data-dir={rowIndex ? 'right' : 'left'}>
               <div className="bento__chip-track">
-                {[...row, ...row].map(({ name, Icon }, index) => (
+                {[...row, ...row].map(({ name, logoPath }, index) => (
                   <span key={`${name}-${index}`} className="bento__chip">
-                    <Icon size={15} weight="duotone" aria-hidden="true" />
+                    <img src={logoPath} alt="" width={16} height={16} />
                     {name}
                   </span>
                 ))}

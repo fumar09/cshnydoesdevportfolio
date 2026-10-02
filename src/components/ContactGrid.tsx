@@ -31,11 +31,21 @@ export default function ContactGrid() {
           <ul className="portfolio-social-list" role="list">
             {profile.socials.map((social) => (
               <li key={social.label}>
-                <a href={social.href} target="_blank" rel="noopener noreferrer">
-                  <img src={social.iconPath} alt="" width={22} height={22} />
-                  <span>{social.label.replace(' profile', '')}</span>
-                  <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
-                </a>
+                {social.href ? (
+                  <a href={social.href} target="_blank" rel="noopener noreferrer">
+                    <img src={social.iconPath} alt="" width={22} height={22} />
+                    <span>{social.label.replace(' profile', '')}</span>
+                    <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
+                  </a>
+                ) : (
+                  <span className="portfolio-social-list__pending">
+                    <img src={social.iconPath} alt="" width={22} height={22} />
+                    <span className="portfolio-social-list__pending-copy">
+                      <span>{social.label.replace(' profile', '')}</span>
+                      <small>{social.status ?? 'Coming soon'}</small>
+                    </span>
+                  </span>
+                )}
               </li>
             ))}
           </ul>
