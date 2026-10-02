@@ -4,9 +4,6 @@ import path from 'node:path'
 import { handlePortfolioChat } from './api/chat-core'
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
-  const chatApiKey = env.GEMINI_API_KEY || process.env.GEMINI_API_KEY
-
   return {
     plugins: [react(), {
       name: 'portfolio-chat-local-api',
@@ -43,6 +40,8 @@ export default defineConfig(({ mode }) => {
             void (async () => {
               try {
                 const body = JSON.parse(Buffer.concat(chunks).toString('utf8')) as unknown
+                const env = loadEnv(mode, process.cwd(), '')
+                const chatApiKey = env.GEMINI_API_KEY || process.env.GEMINI_API_KEY
                 const result = await handlePortfolioChat(body, req.headers, chatApiKey)
                 res.statusCode = result.status
                 res.setHeader('Content-Type', 'application/json; charset=utf-8')

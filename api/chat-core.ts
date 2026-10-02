@@ -111,7 +111,12 @@ export async function handlePortfolioChat(
   headers: Record<string, string | string[] | undefined>,
   apiKey: string | undefined,
 ): Promise<ChatResult> {
-  if (!apiKey) return { status: 503, body: { error: 'The assistant is not configured yet.' } }
+  if (!apiKey) {
+    return {
+      status: 503,
+      body: { error: 'Gemini key missing. Set GEMINI_API_KEY in your local .env file or in Vercel Project Settings, then try again.' },
+    }
+  }
 
   const messages = payload && typeof payload === 'object'
     ? normalizeMessages((payload as { messages?: unknown }).messages)
