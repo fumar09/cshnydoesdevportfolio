@@ -112,8 +112,7 @@ body {
 .rail__social:active,
 .rail__theme:active,
 .bento__card:active,
-.nav__theme:active,
-.a11y__button:active {
+.nav__theme:active {
   transform: scale(0.97) !important;
   transition-duration: 100ms;
 }

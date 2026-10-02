@@ -14,12 +14,9 @@ import {
   type Icon,
 } from '@/components/slab'
 import { credentials, portfolioProjects } from '@/data/portfolio'
-import { tools } from '@/data/tools'
 import ProfileImages from './ProfileImages'
 
 const PHOTOS = [0, 1, 2]
-
-const TOOL_ROWS = [tools.slice(0, 3), tools.slice(3)]
 
 const STRENGTHS = [
   { Icon: Stack, title: 'UI/UX and visual design', note: 'Figma and user-centered layouts' },
@@ -28,6 +25,8 @@ const STRENGTHS = [
   { Icon: SealCheck, title: 'Customer service', note: 'Clear, helpful communication' },
   { Icon: User, title: 'Team leadership', note: 'Coordination and training' },
 ]
+
+const SKILL_ROWS = [STRENGTHS.slice(0, 3), STRENGTHS.slice(3)]
 
 function CardHead({ Icon, title, desc }: { Icon: Icon; title: string; desc: string }) {
   return (
@@ -72,15 +71,15 @@ export default function HomeBento() {
       </Link>
 
       <Link to="/services" className="bento__card bento__card--ai">
-        <CardHead Icon={Wrench} title="Tools I use" desc="Figma, Google Workspace, Microsoft 365, HTML, CSS, and JavaScript." />
+        <CardHead Icon={Wrench} title="Skills I have" desc="User-centered design, web development, IT support, and people-first service." />
         <div className="bento__media bento__chips" aria-hidden="true">
-          {TOOL_ROWS.map((row, rowIndex) => (
+          {SKILL_ROWS.map((row, rowIndex) => (
             <div key={rowIndex} className="bento__chip-row" data-dir={rowIndex ? 'right' : 'left'}>
               <div className="bento__chip-track">
-                {[...row, ...row].map(({ name, logoPath }, index) => (
-                  <span key={`${name}-${index}`} className="bento__chip">
-                    <img src={logoPath} alt="" width={16} height={16} />
-                    {name}
+                {[...row, ...row].map(({ title, Icon }, index) => (
+                  <span key={`${title}-${index}`} className="bento__chip">
+                    <Icon size={15} weight="duotone" aria-hidden="true" />
+                    {title}
                   </span>
                 ))}
               </div>

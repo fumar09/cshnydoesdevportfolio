@@ -151,23 +151,6 @@ html { -webkit-tap-highlight-color: transparent; }
   }
 
 
-
-
-  .a11y {
-    top: calc(var(--qmenu-top) + var(--qmenu-size) + 8px);
-    right: 16px;
-    bottom: auto;
-    left: auto;
-  }
-  .a11y__button { display: none; }
-  .a11y__panel {
-    top: 0;
-    right: 0;
-    bottom: auto;
-    left: auto;
-    transform: translateY(-8px) scale(0.98);
-    transform-origin: top right;
-  }
 }
 
 @keyframes route-rise {

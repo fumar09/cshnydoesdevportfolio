@@ -175,6 +175,14 @@
                 background var(--dur-fast) var(--ease-out),
                 transform var(--dur-med) var(--ease-spring);
   }
+  .rail__link--button {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
   .rail__link svg { flex-shrink: 0; opacity: 0.85; }
 
 

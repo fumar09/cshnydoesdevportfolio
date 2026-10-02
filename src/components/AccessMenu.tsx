@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { PersonArmsSpread, X, ArrowCounterClockwise } from '@/components/slab'
+import { X, ArrowCounterClockwise } from '@/components/slab'
 import { DEFAULT_PREFS, readPrefs, savePrefs, type A11yPrefs, type TextSize } from '@/lib/a11y'
 import { useDismiss, type DismissReason } from '@/hooks/useDismiss'
 
@@ -29,10 +29,9 @@ export const A11Y_OPEN_EVENT = 'a11y:open'
 export default function AccessMenu() {
   const [open, setOpen] = useState(false)
   const [prefs, setPrefs] = useState<A11yPrefs>(readPrefs)
+  const [panelPosition, setPanelPosition] = useState({ left: 16, top: 16, transformOrigin: 'top left' })
   const rootRef = useRef<HTMLDivElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
-  const buttonRef = useRef<HTMLButtonElement>(null)
-
 
   const returnRef = useRef<HTMLElement | null>(null)
 
@@ -42,7 +41,7 @@ export default function AccessMenu() {
 
     if (reason !== 'outside') {
       const opener = returnRef.current
-      ;(opener?.isConnected ? opener : buttonRef.current)?.focus()
+      if (opener?.isConnected) opener.focus()
     }
     returnRef.current = null
   }, [])
@@ -56,7 +55,31 @@ export default function AccessMenu() {
 
   useEffect(() => {
     const onOpen = (e: Event) => {
-      returnRef.current = (e as CustomEvent<HTMLElement | null>).detail
+      const opener = (e as CustomEvent<HTMLElement | null>).detail
+      returnRef.current = opener
+
+      if (opener) {
+        const rect = opener.getBoundingClientRect()
+        const panelRect = panelRef.current?.getBoundingClientRect()
+        const panelWidth = panelRect?.width || Math.min(300, window.innerWidth - 32)
+        const panelHeight = panelRect?.height || 360
+        const maxLeft = Math.max(16, window.innerWidth - panelWidth - 16)
+        const maxTop = Math.max(16, window.innerHeight - panelHeight - 16)
+        const isQuickMenu = opener.closest('.qmenu') !== null
+        const left = isQuickMenu
+          ? Math.min(maxLeft, Math.max(16, rect.right - panelWidth))
+          : Math.min(maxLeft, Math.max(16, rect.right + 12))
+        const top = isQuickMenu
+          ? Math.min(maxTop, Math.max(16, rect.bottom + 8))
+          : Math.min(maxTop, Math.max(16, rect.top - panelHeight / 2))
+
+        setPanelPosition({
+          left,
+          top,
+          transformOrigin: isQuickMenu ? 'top right' : 'center left',
+        })
+      }
+
       setOpen(true)
     }
     window.addEventListener(A11Y_OPEN_EVENT, onOpen)
@@ -75,13 +98,14 @@ export default function AccessMenu() {
       <div
         className="a11y__panel"
         role="dialog"
-        aria-label="Accessibility options"
+        aria-label="Accessibility settings"
         tabIndex={-1}
         ref={panelRef}
+        style={panelPosition}
         inert={!open || undefined}
       >
         <header className="a11y__head">
-          <span className="a11y__title">Accessibility</span>
+          <span className="a11y__title">Settings</span>
           <button
             type="button"
             className="a11y__close"
@@ -139,22 +163,6 @@ export default function AccessMenu() {
           Reset to default
         </button>
       </div>
-
-      <button
-        type="button"
-        className="a11y__button"
-        ref={buttonRef}
-        onClick={() => {
-          returnRef.current = null
-          setOpen((v) => !v)
-        }}
-        aria-expanded={open}
-        aria-haspopup="dialog"
-        aria-label="Accessibility options"
-        title="Accessibility options"
-      >
-        <PersonArmsSpread size={22} weight="fill" aria-hidden="true" />
-      </button>
     </div>
   )
 }

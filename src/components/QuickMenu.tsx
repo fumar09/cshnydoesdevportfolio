@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useId, useRef, useState, type FocusEvent } from 'react'
-import { PersonArmsSpread, CaretRight, DotsThree } from '@/components/slab'
+import { Gear, CaretRight, DotsThree } from '@/components/slab'
 import ThemeGlyph from './ThemeGlyph'
 import { A11Y_OPEN_EVENT } from './AccessMenu'
 import { getTheme, toggleTheme, type Theme } from '@/lib/theme'
@@ -42,7 +42,7 @@ export default function QuickMenu({ className = '' }: { className?: string }) {
     if (!rootRef.current?.contains(e.relatedTarget as Node | null)) setOpen(false)
   }
 
-  const openAccessibility = () => {
+  const openSettings = () => {
     setOpen(false)
     window.dispatchEvent(new CustomEvent(A11Y_OPEN_EVENT, { detail: buttonRef.current }))
   }
@@ -56,7 +56,7 @@ export default function QuickMenu({ className = '' }: { className?: string }) {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={panelId}
-        aria-label="Theme and accessibility"
+        aria-label="Theme and settings"
       >
         <DotsThree size={22} weight="bold" aria-hidden="true" />
       </button>
@@ -74,9 +74,9 @@ export default function QuickMenu({ className = '' }: { className?: string }) {
           <span className="qmenu__switch" aria-hidden="true" />
         </button>
         <span className="qmenu__sep" aria-hidden="true" />
-        <button type="button" className="qmenu__row" aria-haspopup="dialog" onClick={openAccessibility}>
-          <PersonArmsSpread size={19} weight="fill" aria-hidden="true" />
-          <span className="qmenu__label">Accessibility</span>
+        <button type="button" className="qmenu__row" aria-haspopup="dialog" onClick={openSettings}>
+          <Gear size={19} aria-hidden="true" />
+          <span className="qmenu__label">Settings</span>
           <CaretRight size={15} weight="bold" aria-hidden="true" className="qmenu__caret" />
         </button>
       </div>

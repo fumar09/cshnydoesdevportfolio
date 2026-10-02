@@ -98,6 +98,7 @@
 .home .tools-marquee__item { gap: 10px; padding-right: 44px; font-size: 13.5px; }
 .home .tools-marquee__item::after { height: 16px; }
 .home .tools-marquee__icon, .home .tools-marquee__img { width: 20px; height: 20px; }
+[data-theme='dark'] .home .tools-marquee__img--cursor { filter: invert(1); }
 
 @media (max-width: 640px) {
   .home .tools-marquee__track { gap: 22px; padding: 10px 14px; }

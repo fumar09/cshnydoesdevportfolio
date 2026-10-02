@@ -10,7 +10,11 @@ export default function ToolsMarquee() {
         {doubled.map((tool, i) => (
           <div key={`${tool.name}-${i}`} className="tools-marquee__item">
             <span className="tools-marquee__tile">
-              <img className="tools-marquee__img" src={tool.logoPath} alt="" />
+              <img
+                className={`tools-marquee__img${tool.name === 'Cursor' ? ' tools-marquee__img--cursor' : ''}`}
+                src={tool.logoPath}
+                alt=""
+              />
             </span>
             <span className="tools-marquee__label">{tool.name}</span>
           </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { SealCheck } from '@/components/slab'
+import { Gear, SealCheck } from '@/components/slab'
 import ThemeGlyph from './ThemeGlyph'
 import ProfileImages from './ProfileImages'
 import {
@@ -14,6 +14,7 @@ import {
 } from './RailIcons'
 import { getTheme, toggleTheme, type Theme } from '@/lib/theme'
 import { profile } from '@/data/profile'
+import { A11Y_OPEN_EVENT } from './AccessMenu'
 
 
 
@@ -114,6 +115,17 @@ export default function Rail() {
                 </NavLink>
               </li>
             ))}
+            <li>
+              <button
+                type="button"
+                className="rail__link rail__link--button"
+                onClick={(event) => window.dispatchEvent(new CustomEvent(A11Y_OPEN_EVENT, { detail: event.currentTarget }))}
+                aria-haspopup="dialog"
+              >
+                <Gear size={21} aria-hidden="true" />
+                Settings
+              </button>
+            </li>
           </ul>
         </nav>
 
