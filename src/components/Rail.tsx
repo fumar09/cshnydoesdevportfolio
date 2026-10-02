@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { SealCheck } from '@/components/slab'
 import ThemeGlyph from './ThemeGlyph'
+import ProfileImages from './ProfileImages'
 import {
   HomeIcon,
   FolderIcon,
@@ -46,12 +47,7 @@ export default function Rail() {
     <aside className="rail" aria-label="Profile and site navigation">
       <div className="rail__inner">
         <span className="rail__avatar">
-          <img
-            src={profile.avatarSrc}
-            alt={profile.name}
-            width={120}
-            height={120}
-          />
+          <ProfileImages alt={profile.name} width={120} height={120} />
         </span>
 
         <h2 className="rail__name">

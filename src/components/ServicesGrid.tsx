@@ -2,11 +2,11 @@ import { skillGroups } from '@/data/portfolio'
 
 export default function ServicesGrid() {
   return (
-    <section className="pgrid portfolio-page" aria-labelledby="skills-title">
+    <section className="pgrid portfolio-page" aria-labelledby="services-title">
       <header className="pgrid__head">
-        <span className="pgrid__eyebrow">Skills & toolkit</span>
-        <h1 className="pgrid__title" id="skills-title">Design-minded. Detail-focused.</h1>
-        <p className="pgrid__lede">Technical support, web development, design, and customer-facing strengths from my resume.</p>
+        <span className="pgrid__eyebrow">Services</span>
+        <h1 className="pgrid__title" id="services-title">Practical support. Clear digital experiences.</h1>
+        <p className="pgrid__lede">I offer practical IT support, responsive web development, and user-centered UI/UX design for people and community-focused organizations.</p>
       </header>
 
       <div className="portfolio-skill-grid">

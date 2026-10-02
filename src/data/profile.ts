@@ -14,6 +14,8 @@ export type Profile = {
   handle: string
   role: string
   avatarSrc: string
+  avatarLightSrc: string
+  avatarDarkSrc: string
   verifiedLabel: string
   email: string
   phone: string
@@ -33,7 +35,9 @@ export const profile: Profile = {
   firstName: 'Connie',
   handle: '@itsyourcasheny',
   role: 'Junior IT Support & UI/UX Designer',
-  avatarSrc: '/images/profile.jpg',
+  avatarSrc: '/images/profile-dark.jpg',
+  avatarLightSrc: '/images/profile-light.jpg',
+  avatarDarkSrc: '/images/profile-dark.jpg',
   verifiedLabel: 'TESDA National Certificate II in Computer Systems Servicing',
   email: 'conniefrancesfumarjobapplicant@gmail.com',
   phone: '+63 966 217 6103',
@@ -46,7 +50,7 @@ export const profile: Profile = {
   displayName: { line1: 'Technology should feel', line2: 'human.' },
   hero: {
     body: 'I’m Connie, an early-career IT Assistant and Junior IT Support professional focused on technical support, web application development, and user-centered design. I bring clear customer communication and practical problem-solving to better user experiences.',
-    portraitSrc: '/images/profile.jpg',
+    portraitSrc: '/images/profile-dark.jpg',
     portraitAlt: 'Portrait of Connie Frances Fumar',
   },
   socials: [

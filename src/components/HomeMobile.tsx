@@ -4,11 +4,12 @@ import type { Icon } from '@/components/slab'
 import { profile } from '@/data/profile'
 import { credentials, portfolioProjects } from '@/data/portfolio'
 import QuickMenu from './QuickMenu'
+import ProfileImages from './ProfileImages'
 
 export function HomeProfile() {
   return (
     <header className="hprofile">
-      <img className="hprofile__avatar" src={profile.avatarSrc} alt="" width={56} height={56} />
+      <ProfileImages className="hprofile__avatar" alt={profile.name} width={56} height={56} loading="eager" />
       <div className="hprofile__who">
         <span className="hprofile__name">
           {profile.name}
@@ -42,17 +43,18 @@ type ExploreTile = {
   title: string
   desc: string
   img?: string
+  profile?: boolean
   Icon?: Icon
   accent?: boolean
 }
 
 const TILES: ExploreTile[] = [
   { n: '01', label: 'Projects', to: '/projects', title: 'Selected work', desc: 'Service design, records, music, and career tools.', img: portfolioProjects[0].image },
-  { n: '02', label: 'Services', to: '/services', title: 'Design and technology', desc: 'UI/UX, web applications, and technical support.', Icon: Stack },
+  { n: '02', label: 'Services', to: '/services', title: 'Support and user-focused design', desc: 'IT support, responsive web interfaces, and UX design for everyday users and community organizations.', Icon: Stack },
   { n: '03', label: 'Showcase', to: '/showcase', title: 'Web application development', desc: 'ACLC College of Tacloban.', Icon: GraduationCap, accent: true },
   { n: '04', label: 'Credentials', to: '/credentials', title: 'Learning, made tangible', desc: `${credentials.length} professional and technical credentials.`, Icon: Certificate },
   { n: '05', label: 'Testimonials', to: '/testimonials', title: 'Client video testimonials', desc: 'Coming soon.', Icon: VideoCamera },
-  { n: '06', label: 'About', to: '/about', title: `Hi, I’m ${profile.firstName}.`, desc: 'Based in Alcantara, Romblon, Philippines.', img: profile.avatarSrc },
+  { n: '06', label: 'About', to: '/about', title: `Hi, I’m ${profile.firstName}.`, desc: 'Based in Alcantara, Romblon, Philippines.', img: profile.avatarSrc, profile: true },
 ]
 
 export function HomeExplore() {
@@ -65,7 +67,9 @@ export function HomeExplore() {
           return (
             <li key={tile.to}>
               <Link to={tile.to} className={`htile${tile.accent ? ' htile--accent' : ''}`}>
-                {tile.img ? (
+                {tile.profile ? (
+                  <span className="htile__media"><ProfileImages className="htile__img" alt="" loading="lazy" /></span>
+                ) : tile.img ? (
                   <span className="htile__media"><img className="htile__img" src={tile.img} alt="" loading="lazy" /></span>
                 ) : (
                   <span className="htile__media htile__glyph"><TileIcon size={52} weight="duotone" aria-hidden="true" /></span>

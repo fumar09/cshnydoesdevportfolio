@@ -14,9 +14,9 @@ import {
   type Icon,
 } from '@/components/slab'
 import { credentials, portfolioProjects } from '@/data/portfolio'
-import { profile } from '@/data/profile'
+import ProfileImages from './ProfileImages'
 
-const PHOTOS = [profile.avatarSrc, profile.avatarSrc, profile.avatarSrc]
+const PHOTOS = [0, 1, 2]
 
 const TOOL_ROWS = [
   [
@@ -75,16 +75,16 @@ export default function HomeBento() {
       <Link to="/about" className="bento__card bento__card--about">
         <CardHead Icon={User} title="About" desc="IT support, user-centered design, and people-first service." />
         <div className="bento__media bento__fan" aria-hidden="true">
-          {PHOTOS.map((src, index) => (
+          {PHOTOS.map((index) => (
             <span key={index} className="bento__photo" style={{ ['--i' as string]: index } as CSSProperties}>
-              <img src={src} alt="" loading="lazy" decoding="async" />
+              <ProfileImages alt="" loading="lazy" />
             </span>
           ))}
         </div>
       </Link>
 
       <Link to="/services" className="bento__card bento__card--ai">
-        <CardHead Icon={Wrench} title="Toolkit" desc="Tools and skills for practical, accessible experiences." />
+        <CardHead Icon={Wrench} title="Skills & tools" desc="Figma, web technologies, Google Workspace, and practical IT support." />
         <div className="bento__media bento__chips" aria-hidden="true">
           {TOOL_ROWS.map((row, rowIndex) => (
             <div key={rowIndex} className="bento__chip-row" data-dir={rowIndex ? 'right' : 'left'}>
@@ -115,7 +115,7 @@ export default function HomeBento() {
       </Link>
 
       <Link to="/services" className="bento__card bento__card--services">
-        <CardHead Icon={Stack} title="Services" desc="Design, web development, and IT support strengths." />
+        <CardHead Icon={Stack} title="Services" desc="IT support, web UI, and UX design for people and community-focused organizations." />
         <ul className="bento__media bento__offers" role="list">
           {STRENGTHS.map(({ Icon, title, note }, index) => (
             <li key={title} className="bento__offer" style={{ ['--i' as string]: index } as CSSProperties}>

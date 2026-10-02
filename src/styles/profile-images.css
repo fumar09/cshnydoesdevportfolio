@@ -1,0 +1,7 @@
+html:not([data-theme='dark']) .profile-image--dark {
+  display: none;
+}
+
+html[data-theme='dark'] .profile-image--light {
+  display: none;
+}
