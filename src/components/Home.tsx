@@ -31,6 +31,9 @@ export default function Home() {
   useScrollReveal()
   const phone = useIsPhone()
   const { displayName, hero } = profile
+  const introduction = phone
+    ? hero.body
+    : 'IT support and user-centered design for clear, useful technology.'
 
   return (
     <section className="home" aria-labelledby="home-title">
@@ -52,7 +55,7 @@ export default function Home() {
           )}
         </div>
 
-        <p className="home__lede">{hero.body}</p>
+        <p className="home__lede">{introduction}</p>
         {phone && <HomeStats />}
       </div>
 
@@ -62,8 +65,8 @@ export default function Home() {
       <div className="home__glass home__glass--tools">
         <div className="home__tools">
           <div className="home__tools-head">
-            <span className="home__tools-eyebrow">The toolkit</span>
-            <h2 className="home__tools-label">Tools and strengths</h2>
+            <span className="home__tools-eyebrow">Daily drivers</span>
+            <h2 className="home__tools-label">Tools I work with</h2>
           </div>
           <ToolsMarquee />
         </div>

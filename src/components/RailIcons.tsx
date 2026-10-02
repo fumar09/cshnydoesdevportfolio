@@ -4,7 +4,7 @@
 
 
 
-import { House, FolderOpen, Stack, Coffee, Star, User, ChatCircle, Quotes, type Icon } from '@/components/slab'
+import { House, FolderOpen, Stack, Coffee, Star, User, ChatCircle, type Icon } from '@/components/slab'
 
 type IconProps = { size?: number }
 
@@ -23,6 +23,5 @@ export const FolderIcon = wrap(FolderOpen)
 export const StackIcon = wrap(Stack)
 export const CupIcon = wrap(Coffee)
 export const StarIcon = wrap(Star)
-export const QuotesIcon = wrap(Quotes)
 export const UserIcon = wrap(User)
 export const MessageIcon = wrap(ChatCircle)

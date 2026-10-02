@@ -440,6 +440,11 @@
     background: var(--navy-ink);
     box-shadow: 0 1px 1.5px rgba(6, 12, 26, 0.06), 0 18px 40px -24px rgba(6, 12, 26, 0.55);
   }
+  .hproof__stage--soon {
+    background:
+      radial-gradient(50% 70% at 50% 48%, rgba(255, 122, 26, 0.2), transparent 100%),
+      linear-gradient(145deg, #101a2e, #080d18 70%);
+  }
   .hproof__stage img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 

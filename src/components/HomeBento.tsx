@@ -1,72 +1,147 @@
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, EnvelopeSimple, FolderOpen, GraduationCap, Quotes, User, Wrench } from '@/components/slab'
-import { education, portfolioProjects, skillGroups } from '@/data/portfolio'
+import {
+  ArrowUpRight,
+  Briefcase,
+  Certificate,
+  FolderOpen,
+  Quotes,
+  SealCheck,
+  Stack,
+  User,
+  VideoCamera,
+  Wrench,
+  type Icon,
+} from '@/components/slab'
+import { credentials, portfolioProjects } from '@/data/portfolio'
 import { profile } from '@/data/profile'
 
-const sections = [
-  {
-    to: '/projects',
-    label: 'Selected work',
-    title: 'Four projects',
-    detail: 'Community services, records, music, and career tools.',
-    Icon: FolderOpen,
-    image: portfolioProjects[0].image,
-    imageAlt: portfolioProjects[0].imageAlt,
-  },
-  {
-    to: '/about',
-    label: 'About Connie',
-    title: 'People-first service.',
-    detail: 'Support-minded, design-aware, and grounded in customer care.',
-    Icon: User,
-    image: profile.avatarSrc,
-    imageAlt: profile.hero.portraitAlt,
-  },
-  {
-    to: '/services',
-    label: 'Skills',
-    title: 'Design-minded. Detail-focused.',
-    detail: skillGroups[0].items.slice(0, 3).join(' · '),
-    Icon: Wrench,
-  },
-  {
-    to: '/showcase',
-    label: 'Education',
-    title: 'Web application development.',
-    detail: education[0].school,
-    Icon: GraduationCap,
-  },
-  {
-    to: '/testimonials',
-    label: 'Testimonials',
-    title: 'Client feedback.',
-    detail: 'Video testimonials will be added here soon.',
-    Icon: Quotes,
-  },
-  {
-    to: '/contact',
-    label: 'Contact',
-    title: 'Let’s make it make sense.',
-    detail: profile.location,
-    Icon: EnvelopeSimple,
-  },
+const PHOTOS = [profile.avatarSrc, profile.avatarSrc, profile.avatarSrc]
+
+const TOOL_ROWS = [
+  [
+    { name: 'Figma', Icon: SealCheck },
+    { name: 'HTML & CSS', Icon: Stack },
+    { name: 'JavaScript', Icon: Stack },
+    { name: 'Responsive UI', Icon: User },
+  ],
+  [
+    { name: 'Google Workspace', Icon: Briefcase },
+    { name: 'Microsoft 365', Icon: Briefcase },
+    { name: 'Technical support', Icon: Wrench },
+    { name: 'Hardware troubleshooting', Icon: Wrench },
+  ],
 ]
 
-export default function HomeBento() {
+const STRENGTHS = [
+  { Icon: Stack, title: 'UI/UX and visual design', note: 'Figma and user-centered layouts' },
+  { Icon: Briefcase, title: 'Web application development', note: 'HTML, CSS, and JavaScript' },
+  { Icon: Wrench, title: 'Technical support', note: 'Practical troubleshooting' },
+  { Icon: SealCheck, title: 'Customer service', note: 'Clear, helpful communication' },
+  { Icon: User, title: 'Team leadership', note: 'Coordination and training' },
+]
+
+function CardHead({ Icon, title, desc }: { Icon: Icon; title: string; desc: string }) {
   return (
-    <nav className="portfolio-home-grid" aria-label="Explore Connie’s portfolio">
-      {sections.map(({ to, label, title, detail, Icon, image, imageAlt }, index) => (
-        <Link key={to} to={to} className={`portfolio-home-card portfolio-home-card--${index + 1}`}>
-          <span className="portfolio-home-card__top">
-            <span className="portfolio-home-card__icon"><Icon size={19} weight="duotone" aria-hidden="true" /></span>
-            <span className="portfolio-home-card__label">{label}</span>
-            <ArrowUpRight size={17} weight="bold" aria-hidden="true" className="portfolio-home-card__arrow" />
+    <header className="bento__head">
+      <span className="bento__label">
+        <span className="bento__icon"><Icon size={20} weight="fill" aria-hidden="true" /></span>
+        <h3 className="bento__title">{title}</h3>
+      </span>
+      <p className="bento__desc">{desc}</p>
+      <ArrowUpRight size={15} weight="bold" aria-hidden="true" className="bento__arrow" />
+    </header>
+  )
+}
+
+export default function HomeBento() {
+  const projectShots = portfolioProjects.map((project) => project.image)
+
+  return (
+    <nav className="bento" aria-label="Explore Connie’s portfolio">
+      <Link to="/projects" className="bento__card bento__card--projects">
+        <CardHead Icon={FolderOpen} title="Projects" desc="Selected work in community services, records, music, and career tools." />
+        <div className="bento__media bento__reel" aria-hidden="true">
+          <div className="bento__reel-track">
+            {[...projectShots, ...projectShots].map((src, index) => (
+              <span key={`${src}-${index}`} className="bento__shot">
+                <img src={src} alt="" loading="lazy" decoding="async" />
+              </span>
+            ))}
+          </div>
+        </div>
+      </Link>
+
+      <Link to="/about" className="bento__card bento__card--about">
+        <CardHead Icon={User} title="About" desc="IT support, user-centered design, and people-first service." />
+        <div className="bento__media bento__fan" aria-hidden="true">
+          {PHOTOS.map((src, index) => (
+            <span key={index} className="bento__photo" style={{ ['--i' as string]: index } as CSSProperties}>
+              <img src={src} alt="" loading="lazy" decoding="async" />
+            </span>
+          ))}
+        </div>
+      </Link>
+
+      <Link to="/services" className="bento__card bento__card--ai">
+        <CardHead Icon={Wrench} title="Toolkit" desc="Tools and skills for practical, accessible experiences." />
+        <div className="bento__media bento__chips" aria-hidden="true">
+          {TOOL_ROWS.map((row, rowIndex) => (
+            <div key={rowIndex} className="bento__chip-row" data-dir={rowIndex ? 'right' : 'left'}>
+              <div className="bento__chip-track">
+                {[...row, ...row].map(({ name, Icon }, index) => (
+                  <span key={`${name}-${index}`} className="bento__chip">
+                    <Icon size={15} weight="duotone" aria-hidden="true" />
+                    {name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Link>
+
+      <Link to="/credentials" className="bento__card bento__card--creds">
+        <CardHead Icon={Certificate} title="Credentials" desc="Professional learning and technical certifications." />
+        <div className="bento__media bento__badge" aria-hidden="true">
+          <span className="bento__badge-ring">
+            <img src={credentials[0].image} alt="" width={72} height={72} />
           </span>
-          <span className="portfolio-home-card__title">{title}</span>
-          <span className="portfolio-home-card__detail">{detail}</span>
-          {image && <img className="portfolio-home-card__image" src={image} alt={imageAlt ?? ''} loading="lazy" decoding="async" />}
-        </Link>
-      ))}
+          <span className="bento__badge-tag">
+            <SealCheck size={14} weight="fill" aria-hidden="true" />
+            {credentials.length} credentials
+          </span>
+        </div>
+      </Link>
+
+      <Link to="/services" className="bento__card bento__card--services">
+        <CardHead Icon={Stack} title="Services" desc="Design, web development, and IT support strengths." />
+        <ul className="bento__media bento__offers" role="list">
+          {STRENGTHS.map(({ Icon, title, note }, index) => (
+            <li key={title} className="bento__offer" style={{ ['--i' as string]: index } as CSSProperties}>
+              <span className="bento__offer-tile"><Icon size={15} weight="duotone" aria-hidden="true" /></span>
+              <span className="bento__offer-text">
+                <span className="bento__offer-title">{title}</span>
+                <span className="bento__offer-note">{note}</span>
+              </span>
+              <span className="bento__offer-num" aria-hidden="true">0{index + 1}</span>
+            </li>
+          ))}
+        </ul>
+      </Link>
+
+      <Link to="/testimonials" className="bento__card bento__card--quotes">
+        <CardHead Icon={Quotes} title="Testimonials" desc="Client video testimonials will be added here soon." />
+        <div className="bento__media bento__reviews" data-soon="true" aria-hidden="true">
+          <div className="bento__reviews-track">
+            <span className="bento__review bento__review--soon">
+              <span className="bento__review-top"><VideoCamera size={18} weight="duotone" /><b>Client videos</b></span>
+              <span className="bento__review-role">Video testimonials are coming soon.</span>
+              <span className="bento__review-work">Coming soon</span>
+            </span>
+          </div>
+        </div>
+      </Link>
     </nav>
   )
 }

@@ -371,6 +371,11 @@
   animation: bento-drift-up 20s linear infinite;
   animation-play-state: paused;
 }
+.bento__reviews[data-soon='true'] .bento__reviews-track {
+  height: 100%;
+  justify-content: center;
+  animation: none;
+}
 .bento__card:hover .bento__reviews-track { animation-play-state: running; }
 .bento__review {
   display: flex;

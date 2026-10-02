@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, Briefcase, Certificate, FolderOpen, GraduationCap, Quotes, User, Wrench } from '@/components/slab'
+import { CaretRight, Certificate, GraduationCap, Play, SealCheck, Stack, VideoCamera } from '@/components/slab'
+import type { Icon } from '@/components/slab'
 import { profile } from '@/data/profile'
-import { portfolioProjects } from '@/data/portfolio'
+import { credentials, portfolioProjects } from '@/data/portfolio'
 import QuickMenu from './QuickMenu'
 
 export function HomeProfile() {
@@ -9,7 +10,10 @@ export function HomeProfile() {
     <header className="hprofile">
       <img className="hprofile__avatar" src={profile.avatarSrc} alt="" width={56} height={56} />
       <div className="hprofile__who">
-        <span className="hprofile__name">{profile.name}</span>
+        <span className="hprofile__name">
+          {profile.name}
+          <SealCheck size={16} weight="fill" className="hprofile__verified" aria-label={profile.verifiedLabel} />
+        </span>
         <span className="hprofile__handle">{profile.handle} · {profile.role}</span>
       </div>
       <QuickMenu className="hprofile__menu" />
@@ -31,37 +35,70 @@ export function HomeStats() {
   )
 }
 
-const tiles = [
-  { label: 'Projects', to: '/projects', title: 'Selected work', description: 'Four projects across public services, records, music, and career tools.', Icon: FolderOpen, image: portfolioProjects[0].image },
-  { label: 'Experience', to: '/about', title: 'People-first service', description: 'Customer-facing leadership and event service experience.', Icon: Briefcase },
-  { label: 'Skills', to: '/services', title: 'Design and technology', description: 'UI/UX, web applications, IT support, and visual design.', Icon: Wrench },
-  { label: 'Education', to: '/showcase', title: 'Web application development', description: 'A foundation in information technology and design.', Icon: GraduationCap },
-  { label: 'Credentials', to: '/credentials', title: 'Learning, made tangible', description: 'Google UX Design and TESDA certifications.', Icon: Certificate },
-  { label: 'Testimonials', to: '/testimonials', title: 'Client feedback', description: 'Video testimonials will be added here soon.', Icon: Quotes },
-  { label: 'About', to: '/about', title: `Hi, I’m ${profile.firstName}.`, description: 'Based in Alcantara, Romblon, Philippines.', Icon: User, image: profile.avatarSrc },
+type ExploreTile = {
+  n: string
+  label: string
+  to: string
+  title: string
+  desc: string
+  img?: string
+  Icon?: Icon
+  accent?: boolean
+}
+
+const TILES: ExploreTile[] = [
+  { n: '01', label: 'Projects', to: '/projects', title: 'Selected work', desc: 'Service design, records, music, and career tools.', img: portfolioProjects[0].image },
+  { n: '02', label: 'Services', to: '/services', title: 'Design and technology', desc: 'UI/UX, web applications, and technical support.', Icon: Stack },
+  { n: '03', label: 'Showcase', to: '/showcase', title: 'Web application development', desc: 'ACLC College of Tacloban.', Icon: GraduationCap, accent: true },
+  { n: '04', label: 'Credentials', to: '/credentials', title: 'Learning, made tangible', desc: `${credentials.length} professional and technical credentials.`, Icon: Certificate },
+  { n: '05', label: 'Testimonials', to: '/testimonials', title: 'Client video testimonials', desc: 'Coming soon.', Icon: VideoCamera },
+  { n: '06', label: 'About', to: '/about', title: `Hi, I’m ${profile.firstName}.`, desc: 'Based in Alcantara, Romblon, Philippines.', img: profile.avatarSrc },
 ]
 
 export function HomeExplore() {
   return (
     <>
       <div className="hsec"><h2 className="hsec__title">Explore</h2></div>
-      <ul className="portfolio-mobile-tiles" role="list">
-        {tiles.map(({ label, to, title, description, Icon, image }) => (
-          <li key={label}>
-            <Link to={to} className="portfolio-mobile-tile">
-              <span className="portfolio-mobile-tile__media">
-                {image ? <img src={image} alt="" loading="lazy" /> : <Icon size={32} weight="duotone" aria-hidden="true" />}
-              </span>
-              <span className="portfolio-mobile-tile__copy">
-                <span className="portfolio-mobile-tile__label">{label}</span>
-                <span className="portfolio-mobile-tile__title">{title}</span>
-                <span className="portfolio-mobile-tile__detail">{description}</span>
-              </span>
-              <ArrowUpRight size={18} weight="bold" aria-hidden="true" />
-            </Link>
-          </li>
-        ))}
+      <ul className="htiles" role="list">
+        {TILES.map((tile) => {
+          const TileIcon = tile.Icon ?? Stack
+          return (
+            <li key={tile.to}>
+              <Link to={tile.to} className={`htile${tile.accent ? ' htile--accent' : ''}`}>
+                {tile.img ? (
+                  <span className="htile__media"><img className="htile__img" src={tile.img} alt="" loading="lazy" /></span>
+                ) : (
+                  <span className="htile__media htile__glyph"><TileIcon size={52} weight="duotone" aria-hidden="true" /></span>
+                )}
+                <span className="htile__body">
+                  <span className="htile__n">{tile.n} {tile.label}</span>
+                  <span className="htile__title">{tile.title}</span>
+                  <span className="htile__desc">{tile.desc}</span>
+                </span>
+              </Link>
+            </li>
+          )
+        })}
       </ul>
+
+      <div className="hsec">
+        <h2 className="hsec__title">
+          <Link to="/testimonials" className="hsec__link">
+            What clients say
+            <CaretRight size={16} weight="bold" aria-hidden="true" />
+          </Link>
+        </h2>
+      </div>
+      <Link to="/testimonials" className="hproof" aria-label="Client video testimonials are coming soon">
+        <span className="hproof__stage hproof__stage--soon">
+          <span className="hproof__play" aria-hidden="true"><Play size={20} weight="fill" /></span>
+          <span className="hproof__dur" aria-hidden="true">Coming soon</span>
+        </span>
+        <span className="hproof__copy">
+          <span className="hproof__title">Client video testimonials will be added here soon.</span>
+          <span className="hproof__meta">Video testimonials</span>
+        </span>
+      </Link>
     </>
   )
 }
