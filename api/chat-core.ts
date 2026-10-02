@@ -106,18 +106,25 @@ function isRateLimited(ip: string, now = Date.now()) {
   return false
 }
 
+function getOfflineAnswer(message: string) {
+  const normalized = message.trim().toLowerCase()
+
+  if (/^(hi|hello|hey|hiya|good morning|good afternoon|good evening)[!. ]*$/i.test(normalized)) {
+    return 'Hi! I’m Connie’s portfolio assistant. Ask me about her background, projects, experience, skills, tools, or technology stack.'
+  }
+
+  if (/\b(who is connie|who’s connie|who's connie|tell me about connie|about connie|who are you|tell me about yourself)\b/i.test(normalized)) {
+    return 'Connie Frances Fumar is a junior IT support specialist and UI/UX designer from Alcantara, Romblon, Philippines. Her portfolio lists a BS in Information Technology specializing in Web Application Development at ACLC College of Tacloban, credentials in UX design, computer systems servicing, and visual graphic design, and projects including E-Barangay ni Kap, ARCHIVIA, Romantic Music Player, and ResuMay!. This answer is based on her portfolio information.'
+  }
+
+  return undefined
+}
+
 export async function handlePortfolioChat(
   payload: unknown,
   headers: Record<string, string | string[] | undefined>,
   apiKey: string | undefined,
 ): Promise<ChatResult> {
-  if (!apiKey) {
-    return {
-      status: 503,
-      body: { error: 'Gemini key missing. Set GEMINI_API_KEY in your local .env file or in Vercel Project Settings, then try again.' },
-    }
-  }
-
   const messages = payload && typeof payload === 'object'
     ? normalizeMessages((payload as { messages?: unknown }).messages)
     : null
@@ -131,6 +138,16 @@ export async function handlePortfolioChat(
     return {
       status: 200,
       body: { answer: 'I can talk about Connie’s portfolio, experience, tools, and technology stack, but I can’t help with source code or coding.' },
+    }
+  }
+
+  const offlineAnswer = getOfflineAnswer(lastMessage)
+  if (offlineAnswer) return { status: 200, body: { answer: offlineAnswer } }
+
+  if (!apiKey) {
+    return {
+      status: 503,
+      body: { error: 'Gemini is not configured. Set GEMINI_API_KEY in your local .env file or in Vercel Project Settings, then try again.' },
     }
   }
 
@@ -162,6 +179,17 @@ export async function handlePortfolioChat(
     })
 
     if (!response.ok) {
+      const errorDetails = await response.json().catch(() => ({})) as { error?: { message?: string } }
+      const providerMessage = errorDetails.error?.message ?? ''
+      if (response.status === 429 && /quota|billing/i.test(providerMessage)) {
+        return {
+          status: 503,
+          body: { error: 'Gemini reports that this Google AI project has no available quota. Portfolio greetings and Connie’s basic profile answer still work, but AI replies and live search need the quota to reset or be increased in Google AI Studio.' },
+        }
+      }
+      if (response.status === 429) {
+        return { status: 503, body: { error: 'Gemini is being rate limited right now. Please wait a minute and try again.' } }
+      }
       console.error('Gemini request failed with status', response.status)
       return { status: 502, body: { error: 'The assistant could not find an answer right now. Please try again.' } }
     }
