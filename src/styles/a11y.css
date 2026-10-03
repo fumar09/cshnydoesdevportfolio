@@ -190,7 +190,6 @@
 :root[data-a11y-text='lg'] .shell__panel > * { zoom: 1.12; }
 :root[data-a11y-text='xl'] .rail__inner,
 :root[data-a11y-text='xl'] .shell__panel > * { zoom: 1.25; }
-:root[data-a11y-text] .shell__panel[data-fixed='true'] { overflow-y: auto; }
 :root[data-a11y-text] .home__showcase > .bento { height: auto; }
 
 

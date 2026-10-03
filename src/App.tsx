@@ -19,6 +19,41 @@ import { getPerfTier, watchFrameHealth, PERF_TIER_EVENT } from '@/lib/perf'
 
 const HeroCanvas = lazy(() => import('@/components/HeroCanvasV2'))
 
+const PAGE_METADATA: Record<string, { title: string; description: string }> = {
+  '/': {
+    title: 'Connie Frances Fumar | Junior IT Support & UI/UX Designer',
+    description: 'Connie Frances Fumar is a junior IT support and UI/UX designer in Romblon, Philippines. Explore web projects, technical support experience, and user-centered design work.',
+  },
+  '/projects': {
+    title: 'Projects | Connie Frances Fumar',
+    description: 'Explore Connie Frances Fumar’s selected projects in community services, records management, music, and career tools.',
+  },
+  '/services': {
+    title: 'IT Support & UI/UX Services | Connie Frances Fumar',
+    description: 'IT support, responsive web development, and user-centered UI/UX design for people and community-focused organizations.',
+  },
+  '/showcase': {
+    title: 'Education | Connie Frances Fumar',
+    description: 'Formal studies in web application development and earlier education in Leyte and Romblon.',
+  },
+  '/testimonials': {
+    title: 'Testimonials | Connie Frances Fumar',
+    description: 'Client feedback and testimonials for Connie Frances Fumar’s IT support and design work.',
+  },
+  '/credentials': {
+    title: 'Certificates & Recognition | Connie Frances Fumar',
+    description: 'Professional learning, technical certifications, and creative achievements of Connie Frances Fumar.',
+  },
+  '/about': {
+    title: 'About Connie Frances Fumar | IT Support & UI/UX Designer',
+    description: 'Learn about Connie Frances Fumar’s IT support experience, education, community work, and creative interests.',
+  },
+  '/contact': {
+    title: 'Contact Connie Frances Fumar',
+    description: 'Contact Connie Frances Fumar in Alcantara, Romblon about IT support, web applications, or UI/UX design opportunities.',
+  },
+}
+
 
 
 
@@ -32,8 +67,6 @@ export default function App() {
   useLenis()
 
   const { pathname } = useLocation()
-  const FIXED_ROUTES = ['/', '/projects', '/credentials', '/testimonials', '/about', '/contact']
-  const isFixed = FIXED_ROUTES.includes(pathname)
 
 
 
@@ -45,6 +78,31 @@ export default function App() {
 
   useEffect(() => {
     panelRef.current?.scrollTo({ top: 0, behavior: 'auto' })
+  }, [pathname])
+
+  useEffect(() => {
+    const page = PAGE_METADATA[pathname] ?? PAGE_METADATA['/']
+    const origin = window.location.origin
+    const canonicalUrl = new URL(pathname, origin).href
+    const socialImageUrl = new URL('/images/og-portfolio.jpg', origin).href
+
+    document.title = page.title
+    const setMeta = (selector: string, content: string) => {
+      const element = document.querySelector<HTMLMetaElement>(selector)
+      if (element) element.content = content
+    }
+
+    setMeta('meta[name="description"]', page.description)
+    setMeta('meta[property="og:title"]', page.title)
+    setMeta('meta[property="og:description"]', page.description)
+    setMeta('meta[property="og:url"]', canonicalUrl)
+    setMeta('meta[property="og:image"]', socialImageUrl)
+    setMeta('meta[name="twitter:title"]', page.title)
+    setMeta('meta[name="twitter:description"]', page.description)
+    setMeta('meta[name="twitter:image"]', socialImageUrl)
+
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    if (canonical) canonical.href = canonicalUrl
   }, [pathname])
 
 
@@ -110,11 +168,12 @@ export default function App() {
           ref={panelRef}
           id={SCROLLER_ID}
           className="shell__panel"
-          data-fixed={isFixed ? 'true' : 'false'}
         >
-          <Suspense fallback={null}>
-            <Outlet />
-          </Suspense>
+          <div className="shell__content">
+            <Suspense fallback={null}>
+              <Outlet />
+            </Suspense>
+          </div>
         </main>
       </div>
       {phone && <TabBar />}

@@ -45,7 +45,7 @@ export const profile: Profile = {
   location: 'Alcantara, Romblon, Philippines',
   stats: [
     { value: '4', label: 'Featured projects', Icon: Briefcase },
-    { value: '3', label: 'Certifications', Icon: SealCheck },
+    { value: '2', label: 'Certifications', Icon: SealCheck },
     { value: '2', label: 'Community groups', Icon: UsersThree },
   ],
   displayName: { line1: 'Technology should feel', line2: 'human.' },

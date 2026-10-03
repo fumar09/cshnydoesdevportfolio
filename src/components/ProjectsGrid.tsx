@@ -7,7 +7,7 @@ export default function ProjectsGrid() {
       <header className="pgrid__head">
         <span className="pgrid__eyebrow">Selected work</span>
         <h1 className="pgrid__title" id="projects-title">A few things I’ve helped shape.</h1>
-        <p className="pgrid__lede">Four projects exploring public services, information systems, music, and career tools.</p>
+        <p className="pgrid__lede">Four projects across community services, records management, music, and career tools.</p>
       </header>
 
       <div className="portfolio-project-grid" aria-label="Portfolio projects">

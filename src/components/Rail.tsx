@@ -34,7 +34,7 @@ export const RAIL_LINKS = [
   { label: 'Showcase', to: '/showcase', Icon: CupIcon },
   { label: 'Testimonials', to: '/testimonials', Icon: StarIcon },
   { label: 'About', to: '/about', Icon: UserIcon },
-  { label: 'FAQs / Contact', to: '/contact', Icon: MessageIcon },
+  { label: 'Contact', to: '/contact', Icon: MessageIcon },
 ] as const
 
 export default function Rail() {

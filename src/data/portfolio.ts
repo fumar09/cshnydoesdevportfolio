@@ -19,7 +19,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'Service platform',
     period: '2024–2025',
     role: 'UI/UX Designer & Co-Developer',
-    description: 'Helped digitize barangay document requests through accessible navigation, wireframes, and features shaped by constituent feedback.',
+    description: 'Mapped document-request flows, created wireframes, and shaped portal features with resident feedback to make barangay services easier to access.',
     image: '/images/e-barangay-preview.jpg',
     imageAlt: 'Preview of the E-Barangay ni Kap interface',
     tags: ['Service flows', 'Resident access', 'Community services'],
@@ -31,7 +31,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'Records interface',
     period: '2025–2026',
     role: 'UI/UX Designer & Frontend Developer',
-    description: 'Designed a document management and retrieval system, created Figma workflows, and built responsive HTML, CSS, and JavaScript components. Tested with users and worked with a cross-functional team to refine the experience.',
+    description: 'Designed Figma workflows and built responsive frontend components for document search, retrieval, and administration, refining the experience through user testing.',
     image: '/images/archivia-preview.jpg',
     imageAlt: 'Preview of the ARCHIVIA interface',
     tags: ['Record retrieval', 'Admin workflow', 'Responsive frontend'],
@@ -42,7 +42,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'Portfolio project',
     period: 'Independent concept',
     role: 'UI/UX & Frontend',
-    description: 'An independent music-player interface concept exploring a softer visual direction, readable controls, and responsive frontend presentation.',
+    description: 'Created a responsive music-player concept with a softer visual style, clear playback controls, and a focused listening experience.',
     image: '/images/romantic-music-player-preview.jpg',
     imageAlt: 'Preview of the Romantic Music Player interface',
     tags: ['Visual mood', 'Playback clarity', 'Responsive frontend'],
@@ -54,7 +54,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'Career tool',
     period: '2025–2026',
     role: 'Developer',
-    description: 'Built an interactive ATS resume optimizer with modern frontend components, refined it with user feedback and design collaborators, and improved performance to support user retention.',
+    description: 'Built an interactive ATS resume optimizer, refining scoring and PDF export with user feedback to help applicants improve their resumes.',
     image: '/images/resumay-preview.png',
     imageAlt: 'Preview of the ResuMay ATS Resume Optimizer interface',
     tags: ['ATS scoring', 'Resume optimization', 'PDF export'],
@@ -151,14 +151,6 @@ export const credentials = [
     imageAlt: 'TESDA National Certificate II in Computer Systems Servicing awarded to Connie Frances Fumar',
     href: '/images/tesda-css-nc-ii.jpg',
   },
-  {
-    title: 'Visual Graphic Design NC III',
-    issuer: 'TESDA · Visual design',
-    detail: 'TESDA certification listed on my portfolio.',
-    image: '',
-    imageAlt: '',
-    href: '',
-  },
 ]
 
 export const recognitions = [
@@ -166,7 +158,6 @@ export const recognitions = [
   'Merit Awardee',
   'Editorial Cartoonist for MARQUEE',
   'Outstanding Student',
-  'Best in Visual Graphic Design NC III',
   '3rd Placer · National PhilHealth Digital Art Competition',
 ]
 

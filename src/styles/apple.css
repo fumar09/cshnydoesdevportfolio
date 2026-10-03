@@ -164,7 +164,7 @@ body {
 
 
 
-  .shell__panel:not([data-fixed='true']) {
+  .shell__panel {
     -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18px, #000 calc(100% - 18px), transparent);
             mask-image: linear-gradient(to bottom, transparent, #000 18px, #000 calc(100% - 18px), transparent);
   }

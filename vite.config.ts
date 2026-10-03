@@ -1,10 +1,43 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
 
 export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  const deploymentUrl =
+    env.VITE_SITE_URL ||
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+    process.env.VERCEL_URL
+  let siteOrigin = ''
+
+  if (deploymentUrl) {
+    try {
+      siteOrigin = new URL(
+        deploymentUrl.startsWith('http') ? deploymentUrl : `https://${deploymentUrl}`,
+      ).origin
+    } catch {
+      siteOrigin = ''
+    }
+  }
+
   return {
-    plugins: [react()],
+    plugins: [
+      react(),
+      {
+        name: 'absolute-social-preview-urls',
+        transformIndexHtml(html) {
+          if (!siteOrigin) return html
+
+          return html
+            .replace('href="/" />', `href="${siteOrigin}/" />`)
+            .replace('content="/" />', `content="${siteOrigin}/" />`)
+            .replaceAll(
+              'content="/images/og-portfolio.jpg"',
+              `content="${siteOrigin}/images/og-portfolio.jpg"`,
+            )
+        },
+      },
+    ],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),

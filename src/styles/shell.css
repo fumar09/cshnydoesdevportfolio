@@ -24,6 +24,11 @@
   z-index: 1;
 }
 
+.shell__content {
+  position: relative;
+  min-height: 100%;
+}
+
 @media (min-width: 1100px) {
   .shell {
     display: flex;
@@ -50,7 +55,6 @@
   }
 
 
-  .shell__panel[data-fixed='true'] { overflow: hidden; }
 }
 
 

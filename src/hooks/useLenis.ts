@@ -80,6 +80,7 @@ export function useLenis() {
 
 
 
+        autoRaf: true,
         duration: 0.9,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -12 * t)),
         smoothWheel: true,
@@ -89,14 +90,6 @@ export function useLenis() {
 
 
       lenis.on('scroll', ScrollTrigger.update)
-
-
-      const tick = (time: number) => {
-        lenis.raf(time * 1000)
-      }
-      gsap.ticker.add(tick)
-      gsap.ticker.lagSmoothing(0)
-
 
 
       const NAV_OFFSET = -88
@@ -126,7 +119,6 @@ export function useLenis() {
 
       cleanup = () => {
         document.removeEventListener('click', onAnchorClick)
-        gsap.ticker.remove(tick)
         lenis.destroy()
       }
     })()
