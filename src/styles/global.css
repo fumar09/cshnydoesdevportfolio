@@ -517,17 +517,16 @@ main > * {
   mix-blend-mode: normal;
 }
 html[data-theme-sweep]::view-transition-new(root) {
-  animation: theme-wave-reveal 1250ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: theme-wave-reveal 1350ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 @keyframes theme-wave-reveal {
   from {
-    clip-path: ellipse(1px 1px at var(--theme-wave-origin-x) var(--theme-wave-origin-y));
+    clip-path: var(--theme-wave-from);
+  }
+  55% {
+    clip-path: var(--theme-wave-middle);
   }
   to {
-    clip-path: ellipse(
-      var(--theme-wave-radius-x)
-      var(--theme-wave-radius-y)
-      at var(--theme-wave-origin-x) var(--theme-wave-origin-y)
-    );
+    clip-path: var(--theme-wave-full);
   }
 }
