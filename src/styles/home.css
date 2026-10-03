@@ -47,11 +47,7 @@
   line-height: 1.06;
   color: var(--navy);
 }
-.home__line { display: block; }
-
-@media (min-width: 1100px) {
-  .home__line { white-space: nowrap; }
-}
+.home__line { display: block; white-space: nowrap; }
 
 .home__cta {
   display: inline-flex;

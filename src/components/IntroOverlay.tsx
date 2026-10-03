@@ -130,12 +130,25 @@ export default function IntroOverlay() {
       canvas.style.width = `${width}px`
       canvas.style.height = `${CANVAS_H}px`
 
-      const height = t?.height ?? title.offsetHeight
+      const wordEls = Array.from(title.querySelectorAll<HTMLElement>('.boot__word'))
+      const probe = document.createElement('span')
+      probe.className = 'boot__word'
+      probe.textContent = ' '
+      title.append(probe)
+      const space = probe.offsetWidth
+      probe.remove()
+
+      const inked = wordEls.reduce((sum, el) => sum + el.offsetWidth, 0)
+      const fits = inked + (wordEls.length - 1) * space <= width + 0.5
+      title.style.columnGap = `${fits ? Math.max(0, (width - inked) / (wordEls.length - 1)) : space}px`
+
+      const height = title.offsetHeight
       const scale = Math.min((window.innerWidth * 0.86) / width, 2.6)
       const w = width * scale
       const h = height * scale
       const sx = (window.innerWidth - w) / 2
-      const sy = (window.innerHeight - h) / 2 - Math.min(96, window.innerHeight * 0.09)
+      const compositionHeight = h + (44 + CANVAS_H) * scale
+      const sy = (window.innerHeight - compositionHeight) / 2
 
       const restTransform = `translate(${sx}px, ${sy}px) scale(${scale})`
       const canvasTransform = `translate(${sx}px, ${sy + h + 44 * scale}px) scale(${scale})`
@@ -190,20 +203,6 @@ export default function IntroOverlay() {
 
 
 
-
-      const wordEls = Array.from(title.querySelectorAll<HTMLElement>('.boot__word'))
-      const probe = document.createElement('span')
-      probe.className = 'boot__word'
-      probe.textContent = ' '
-      title.append(probe)
-      const space = probe.getBoundingClientRect().width / scale
-      probe.remove()
-
-
-
-      const inked = wordEls.reduce((sum, el) => sum + el.getBoundingClientRect().width, 0) / scale
-      const fits = inked + (wordEls.length - 1) * space <= width + 0.5
-      title.style.columnGap = `${fits ? Math.max(0, (width - inked) / (wordEls.length - 1)) : space}px`
 
       const gates = wordEls.map((el, k) => ({
         inner: el.querySelector<HTMLElement>('.boot__word-in'),
@@ -330,6 +329,19 @@ export default function IntroOverlay() {
           ],
           { duration: FLY, easing: EASE_CAMERA },
         )
+
+        const accentWord = title.querySelector<HTMLElement>('.boot__word-in--accent')
+        const homeAccent = target?.querySelector<HTMLElement>('.home__line--accent')
+        if (accentWord && homeAccent) {
+          play(
+            accentWord,
+            [
+              { color: getComputedStyle(accentWord).color },
+              { color: getComputedStyle(homeAccent).color },
+            ],
+            { duration: FLY, easing: EASE_OUT },
+          )
+        }
       } else {
         play(title, [{ opacity: 1 }, { opacity: 0 }], { duration: 420, easing: EASE_OUT })
       }
@@ -360,7 +372,11 @@ export default function IntroOverlay() {
       <div className="boot__title" ref={titleRef}>
         {WORDS.map((word, i) => (
           <span className="boot__word" key={`${word}-${i}`}>
-            <span className="boot__word-in">{word}</span>
+            <span
+              className={`boot__word-in${i === WORDS.length - 1 ? ' boot__word-in--accent' : ''}`}
+            >
+              {word}
+            </span>
           </span>
         ))}
       </div>

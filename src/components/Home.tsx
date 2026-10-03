@@ -42,8 +42,10 @@ export default function Home() {
       <div className="home__head">
         <div className="home__headline">
           <h1 className="home__title" id="home-title">
-            <span className="home__line">{displayName.line1}</span>
-            <span className="home__line home__line--accent">{displayName.line2}</span>
+            <span className="home__line">
+              {displayName.line1}{' '}
+              <span className="home__line--accent">{displayName.line2}</span>
+            </span>
           </h1>
 
           {!phone && (
