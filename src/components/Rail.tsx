@@ -98,7 +98,7 @@ export default function Rail() {
           <button
             type="button"
             className="rail__theme"
-            onClick={(e) => setThemeState(toggleTheme(e.currentTarget, e.detail > 0 ? { x: e.clientX, y: e.clientY } : undefined))}
+            onClick={(e) => setThemeState(toggleTheme(e.currentTarget))}
             aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
           >
             <ThemeGlyph theme={theme} size={21} />

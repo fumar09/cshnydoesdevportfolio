@@ -67,7 +67,7 @@ export default function QuickMenu({ className = '' }: { className?: string }) {
           role="switch"
           aria-checked={theme === 'dark'}
           className="qmenu__row"
-          onClick={(e) => setThemeState(toggleTheme(e.currentTarget, e.detail > 0 ? { x: e.clientX, y: e.clientY } : undefined))}
+          onClick={(e) => setThemeState(toggleTheme(e.currentTarget))}
         >
           <ThemeGlyph theme={theme} size={19} />
           <span className="qmenu__label">Dark theme</span>
