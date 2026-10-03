@@ -61,20 +61,18 @@ export function setTheme(theme: Theme, origin?: SweepOrigin) {
     applyTheme(theme)
     return
   }
-  const x = origin?.x ?? window.innerWidth / 2
-  const y = origin?.y ?? window.innerHeight / 2
-  const r = Math.hypot(
-    Math.max(x, window.innerWidth - x),
-    Math.max(y, window.innerHeight - y),
-  )
-  root.style.setProperty('--sweep-x', `${x}px`)
-  root.style.setProperty('--sweep-y', `${y}px`)
-  root.style.setProperty('--sweep-r', `${r}px`)
+  const direction = !origin || origin.x < window.innerWidth / 2
+    ? 'right'
+    : origin.y < window.innerHeight / 2
+      ? 'down'
+      : 'left'
+  root.dataset.themeSweepDirection = direction
   root.dataset.themeSweep = 'on'
   doc
     .startViewTransition(() => applyTheme(theme))
     .finished.finally(() => {
       delete root.dataset.themeSweep
+      delete root.dataset.themeSweepDirection
     })
 }
 

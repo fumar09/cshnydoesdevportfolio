@@ -284,7 +284,15 @@
 .portfolio-social-list a,
 .portfolio-social-list__pending { display: grid; grid-template-columns: 24px minmax(0, 1fr) 16px; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--line); color: var(--navy); font-size: 13px; font-weight: 700; text-decoration: none; }
 .portfolio-social-list a:hover { color: var(--orange-ink); }
-.portfolio-social-list img { display: block; width: 20px; height: 20px; object-fit: contain; }
+.portfolio-contact-links .portfolio-social-list img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0);
+  transition: filter var(--dur-med) var(--ease-out);
+}
+[data-theme='dark'] .portfolio-contact-links .portfolio-social-list img { filter: brightness(0) invert(1); }
 .portfolio-social-list__pending { grid-template-columns: 24px minmax(0, 1fr); color: var(--muted); }
 .portfolio-social-list__pending-copy { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-width: 0; }
 .portfolio-social-list__pending-copy small { color: var(--muted); font-size: 10px; font-weight: 600; }
