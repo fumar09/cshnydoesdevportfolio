@@ -61,18 +61,23 @@ export function setTheme(theme: Theme, origin?: SweepOrigin) {
     applyTheme(theme)
     return
   }
-  const direction = !origin || origin.x < window.innerWidth / 2
-    ? 'right'
-    : origin.y < window.innerHeight / 2
-      ? 'down'
-      : 'left'
-  root.dataset.themeSweepDirection = direction
+  const x = Math.max(0, Math.min(window.innerWidth, origin?.x ?? window.innerWidth / 2))
+  const y = Math.max(0, Math.min(window.innerHeight, origin?.y ?? window.innerHeight / 2))
+  const radiusX = Math.max(x, window.innerWidth - x) * Math.SQRT2 + 1
+  const radiusY = Math.max(y, window.innerHeight - y) * Math.SQRT2 + 1
+  root.style.setProperty('--theme-wave-origin-x', `${x}px`)
+  root.style.setProperty('--theme-wave-origin-y', `${y}px`)
+  root.style.setProperty('--theme-wave-radius-x', `${radiusX}px`)
+  root.style.setProperty('--theme-wave-radius-y', `${radiusY}px`)
   root.dataset.themeSweep = 'on'
   doc
     .startViewTransition(() => applyTheme(theme))
     .finished.finally(() => {
       delete root.dataset.themeSweep
-      delete root.dataset.themeSweepDirection
+      root.style.removeProperty('--theme-wave-origin-x')
+      root.style.removeProperty('--theme-wave-origin-y')
+      root.style.removeProperty('--theme-wave-radius-x')
+      root.style.removeProperty('--theme-wave-radius-y')
     })
 }
 
