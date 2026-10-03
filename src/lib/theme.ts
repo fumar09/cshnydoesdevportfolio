@@ -61,25 +61,35 @@ export function setTheme(theme: Theme, origin?: SweepOrigin) {
     applyTheme(theme)
     return
   }
-  const direction = !origin || origin.x < window.innerWidth / 2
-    ? 'right'
-    : origin.y < window.innerHeight / 2
-      ? 'down'
-      : 'left'
-  root.dataset.themeSweepDirection = direction
+  const x = Math.max(0, Math.min(window.innerWidth, origin?.x ?? window.innerWidth / 2))
+  const y = Math.max(0, Math.min(window.innerHeight, origin?.y ?? window.innerHeight / 2))
+  const radius = Math.max(
+    Math.hypot(x, y),
+    Math.hypot(window.innerWidth - x, y),
+    Math.hypot(x, window.innerHeight - y),
+    Math.hypot(window.innerWidth - x, window.innerHeight - y),
+  ) + 2
+  root.style.setProperty('--theme-sweep-x', `${x}px`)
+  root.style.setProperty('--theme-sweep-y', `${y}px`)
+  root.style.setProperty('--theme-sweep-radius', `${radius}px`)
+  root.style.setProperty('--theme-sweep-diameter', `${radius * 2}px`)
   root.dataset.themeSweep = 'on'
   doc
     .startViewTransition(() => applyTheme(theme))
     .finished.finally(() => {
       delete root.dataset.themeSweep
-      delete root.dataset.themeSweepDirection
+      root.style.removeProperty('--theme-sweep-x')
+      root.style.removeProperty('--theme-sweep-y')
+      root.style.removeProperty('--theme-sweep-radius')
+      root.style.removeProperty('--theme-sweep-diameter')
     })
 }
 
 
-export function toggleTheme(from?: Element | null): Theme {
+export function toggleTheme(from?: Element | null, clickOrigin?: SweepOrigin): Theme {
   const next: Theme = getTheme() === 'dark' ? 'light' : 'dark'
   const r = from?.getBoundingClientRect()
-  setTheme(next, r ? { x: r.left + r.width / 2, y: r.top + r.height / 2 } : undefined)
+  const origin = clickOrigin ?? (r ? { x: r.left + r.width / 2, y: r.top + r.height / 2 } : undefined)
+  setTheme(next, origin)
   return next
 }
