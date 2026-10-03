@@ -1,0 +1,95 @@
+:root {
+  --font-display: var(--font-body);
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.home__title,
+.boot__title,
+.view__title,
+.pgrid__title,
+.rail__name,
+.hsec__title,
+.legal-page__title,
+.portfolio-page h2,
+.portfolio-page h3 {
+  font-family: var(--font-editorial);
+  font-weight: 500;
+}
+
+.home__title,
+.boot__title {
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.home__line--accent {
+  color: var(--orange-ink);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.view__title,
+.pgrid__title {
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.view__eyebrow,
+.pgrid__eyebrow,
+.home__tools-eyebrow,
+.portfolio-panel__eyebrow,
+.portfolio-project-card__meta,
+.portfolio-timeline__meta,
+.portfolio-community-item__period,
+.portfolio-mobile-tile__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--ls-eyebrow);
+}
+
+.rail__link,
+.tabbar__label,
+.qmenu__label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.portfolio-project-card__description,
+.portfolio-project-card__outcome,
+.portfolio-panel p,
+.portfolio-timeline__item ul,
+.portfolio-education-card__copy p,
+.portfolio-recognition-list li {
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+.portfolio-project-card__role,
+.portfolio-project-card__link,
+.portfolio-inline-link,
+.portfolio-tags li,
+.portfolio-mobile-tile__detail,
+.portfolio-education-card__period span,
+.portfolio-credential-card p,
+.portfolio-social-list__pending-copy small,
+.portfolio-resume-link small {
+  font-size: 12.5px;
+}
+
+@media (max-width: 639px) {
+  .portfolio-project-card__description,
+  .portfolio-project-card__outcome,
+  .portfolio-panel p,
+  .portfolio-timeline__item ul,
+  .portfolio-education-card__copy p,
+  .portfolio-recognition-list li {
+    font-size: 16px;
+  }
+}

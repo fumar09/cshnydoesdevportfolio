@@ -40,13 +40,12 @@
 
 
 :root {
-  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
-    system-ui, 'Segoe UI Variable Display', 'Segoe UI', 'Poppins', sans-serif;
+  --font-display: 'DM Sans', system-ui, -apple-system, sans-serif;
   --ls-display: -0.028em;
   --ls-eyebrow: 0.08em;
   --lh-tight: 1.02;
   --lh-heading: 1.15;
-  --lh-body: 1.5;
+  --lh-body: 1.6;
 }
 body {
   font-optical-sizing: auto;
