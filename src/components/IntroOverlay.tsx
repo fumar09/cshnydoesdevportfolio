@@ -330,17 +330,69 @@ export default function IntroOverlay() {
           { duration: FLY, easing: EASE_CAMERA },
         )
 
-        const accentWord = title.querySelector<HTMLElement>('.boot__word-in--accent')
+        const accentInner = title.querySelector<HTMLElement>('.boot__word-in--accent')
         const homeAccent = target?.querySelector<HTMLElement>('.home__line--accent')
-        if (accentWord && homeAccent) {
-          play(
-            accentWord,
-            [
-              { color: getComputedStyle(accentWord).color },
-              { color: getComputedStyle(homeAccent).color },
-            ],
-            { duration: FLY, easing: EASE_OUT },
-          )
+        const homeLine = target?.querySelector<HTMLElement>('.home__line')
+        const lineText = Array.from(homeLine?.childNodes ?? []).find(
+          (node): node is Text =>
+            node.nodeType === Node.TEXT_NODE &&
+            Boolean(node.textContent?.includes(profile.displayName.line1)),
+        )
+
+        if (homeLine && lineText && homeAccent) {
+          const titleRect = title.getBoundingClientRect()
+          const accentRect = homeAccent.getBoundingClientRect()
+          let textOffset = Math.max(0, lineText.textContent?.indexOf(WORDS[0]) ?? 0)
+
+          wordEls.forEach((wordEl, index) => {
+            const wordInner = wordEl.querySelector<HTMLElement>('.boot__word-in')
+            const isAccent = index === wordEls.length - 1
+            if (!wordInner) return
+
+            let destinationRect: DOMRect
+            if (isAccent) {
+              destinationRect = accentRect
+            } else {
+              const range = document.createRange()
+              range.setStart(lineText, textOffset)
+              range.setEnd(lineText, textOffset + WORDS[index].length)
+              destinationRect = range.getBoundingClientRect()
+              textOffset += WORDS[index].length + 1
+            }
+
+            const sourceRect = wordInner.getBoundingClientRect()
+            const deltaX =
+              destinationRect.left -
+              t.left -
+              (sourceRect.left - titleRect.left) / scale
+            const deltaY =
+              destinationRect.top -
+              t.top -
+              (sourceRect.top - titleRect.top) / scale
+            const frames: Keyframe[] = isAccent
+              ? [
+                  { transform: 'translate(0px, 0px)', offset: 0 },
+                  { transform: `translate(${deltaX}px, 0px)`, offset: 0.66 },
+                  { transform: `translate(${deltaX}px, ${deltaY}px)`, offset: 1 },
+                ]
+              : [
+                  { transform: 'translate(0px, 0px)', offset: 0 },
+                  { transform: `translate(${deltaX}px, ${deltaY}px)`, offset: 1 },
+                ]
+
+            play(wordEl, frames, { duration: FLY, easing: EASE_CAMERA })
+          })
+
+          if (accentInner) {
+            play(
+              accentInner,
+              [
+                { color: getComputedStyle(accentInner).color },
+                { color: getComputedStyle(homeAccent).color },
+              ],
+              { duration: FLY, easing: EASE_OUT },
+            )
+          }
         }
       } else {
         play(title, [{ opacity: 1 }, { opacity: 0 }], { duration: 420, easing: EASE_OUT })
