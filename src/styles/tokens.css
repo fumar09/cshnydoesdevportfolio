@@ -1,20 +1,32 @@
 :root {
 
-  --navy:       #0B1E3F;
+  --bg-app:          #F8FAFC;
+  --bg-card:         #FFFFFF;
+  --bg-card-hover:   #F1F5F9;
+  --border-subtle:   #E2E8F0;
+  --bg-tools:        #FFFFFF;
+  --text-main:       #0F172A;
+  --text-muted:      #475569;
+  --accent-amber:    #EA580C;
+  --accent-amber-hover: #E45705;
+  --accent-subtle:   #FFEDD5;
+  --accent-contrast: #0F172A;
+
+  --navy:       var(--text-main);
   --navy-ink:   #060C1A;
   --cream:      #F4F4ED;
-  --white:      #FFFFFF;
-  --orange:     #FF7A1A;
-  --orange-hover: #FFA155;
+  --white:      var(--bg-card);
+  --orange:     var(--accent-amber);
+  --orange-hover: var(--accent-amber-hover);
   --orange-ink: #B4490A;
-  --muted:      #5A6479;
-  --divider:    rgba(11, 30, 63, 0.12);
+  --muted:      var(--text-muted);
+  --divider:    var(--border-subtle);
   --success:    #2E9E6B;
   --error:      #D9544F;
 
 
 
-  --brands-chip-bg:     #FBFBF7;
+  --brands-chip-bg:     var(--bg-card);
   --brands-chip-border: rgba(11, 30, 63, 0.10);
 
 
@@ -74,15 +86,15 @@
 
 
 
-  --paper:      #FBFBF7;
-  --line:       rgba(11, 30, 63, 0.14);
-  --line-strong:rgba(11, 30, 63, 0.28);
-  --tint:       rgba(11, 30, 63, 0.05);
-  --tint-strong:rgba(11, 30, 63, 0.09);
-  --glass:      rgba(251, 251, 247, 0.72);
+  --paper:      var(--bg-card);
+  --line:       var(--border-subtle);
+  --line-strong:#CBD5E1;
+  --tint:       var(--bg-card-hover);
+  --tint-strong:var(--bg-card-hover);
+  --glass:      rgba(255, 255, 255, 0.76);
 
 
-  --plate:      #F4F4ED;
+  --plate:      var(--bg-card-hover);
 
 
 
@@ -106,20 +118,35 @@
 
 
 [data-theme='dark'] {
+  --bg-app:          #090D16;
+  --bg-card:         #111827;
+  --bg-card-hover:   #1E293B;
+  --border-subtle:   #1E293B;
+  --bg-tools:        #1E293B;
+  --text-main:       #F8FAFC;
+  --text-muted:      #94A3B8;
+  --accent-amber:    #F97316;
+  --accent-amber-hover: #FB923C;
+  --accent-subtle:   #331E11;
+  --accent-contrast: #090D16;
+
   --cream:        #070B14;
-  --paper:        #0B1120;
-  --white:        #0E1626;
-  --navy:         #EDF0F6;
+  --paper:        var(--bg-card);
+  --white:        var(--bg-card);
+  --navy:         var(--text-main);
   --navy-ink:     #04070F;
-  --muted:        rgba(237, 240, 246, 0.60);
-  --divider:      rgba(255, 255, 255, 0.10);
-  --line:         rgba(255, 255, 255, 0.09);
-  --line-strong:  rgba(255, 255, 255, 0.20);
-  --tint:         rgba(255, 255, 255, 0.05);
-  --tint-strong:  rgba(255, 255, 255, 0.09);
-  --glass:        rgba(14, 22, 38, 0.72);
-  --orange-ink:   #FF9A4D;
-  --panel-dark:   #0B1120;
+  --muted:        var(--text-muted);
+  --divider:      var(--border-subtle);
+  --line:         var(--border-subtle);
+  --line-strong:  #334155;
+  --tint:         var(--bg-card-hover);
+  --tint-strong:  var(--bg-card-hover);
+  --glass:        rgba(17, 24, 39, 0.82);
+  --orange:       var(--accent-amber);
+  --orange-hover: var(--accent-amber-hover);
+  --orange-ink:   #FDBA74;
+  --panel-dark:   var(--bg-app);
+  --plate:        var(--bg-card-hover);
   --brands-chip-bg:     #F4F4ED;
   --brands-chip-border: rgba(255, 255, 255, 0.14);
   --shadow-soft:  0 20px 60px -20px rgba(0, 0, 0, 0.75);

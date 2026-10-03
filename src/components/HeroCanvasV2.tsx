@@ -112,11 +112,11 @@ const frag = `
     float w       = fwidth(bands) * HAIRLINE_PIXELS * 0.5;
     float line    = 1.0 - smoothstep(0.0, w, dist);
 
-    // Theme colors (kept identical to v1 so the rest of the page does not shift).
-    vec3 bgLight   = vec3(0.957, 0.957, 0.929); // #F4F4ED cream
-    vec3 lineLight = vec3(0.46,  0.46,  0.46);  // soft neutral gray contour on cream
-    vec3 bgDark    = vec3(0.024, 0.047, 0.102); // #060C1A navy ink
-    vec3 lineDark  = vec3(1.0,   1.0,   1.0);   // solid white on navy (black would be invisible)
+    // Keep the WebGL canvas in sync with the app surface tokens.
+    vec3 bgLight   = vec3(0.973, 0.980, 0.988); // #F8FAFC
+    vec3 lineLight = vec3(0.46,  0.46,  0.46);  // soft neutral gray contour
+    vec3 bgDark    = vec3(0.035, 0.051, 0.086); // #090D16
+    vec3 lineDark  = vec3(0.033, 0.054, 0.091); // #334155 slate contour
 
     vec3 bg      = mix(bgLight, bgDark, uDarkMix);
     vec3 lineCol = mix(lineLight, lineDark, uDarkMix);
@@ -124,10 +124,10 @@ const frag = `
     // Tiny cursor-velocity highlight so flicks leave a faint glow.
     lineCol += cursor * 0.04;
 
-    // Line opacity: soft, tonal beige hairlines - lower alpha so
-    // the contours read as a warm beige tint rather than stark black. The lower
+    // Line opacity: soft neutral hairlines - lower alpha so
+    // the contours read as a gentle surface texture rather than stark black. The lower
     // contrast also hides most of the half-res upscale aliasing. Dark sections
-    // use white lines on navy, kept legible at a similar low alpha.
+    // use slate lines on the darker canvas.
     float lineAlpha = line * mix(0.55, 0.45, uDarkMix);
     vec3 color = mix(bg, lineCol, lineAlpha);
 

@@ -383,9 +383,9 @@
   margin: 0 clamp(24px, 6vw, 96px);
   padding: 0;
   overflow: hidden;
-  background: var(--white);
+  background: var(--bg-tools);
   border-radius: 18px;
-  border: 1px solid rgba(11, 30, 63, 0.06);
+  border: 1px solid var(--border-subtle);
   box-shadow:
     0 30px 70px -40px rgba(11, 30, 63, 0.22),
     0 4px 20px -10px rgba(11, 30, 63, 0.08);
@@ -428,7 +428,7 @@
   transform: translateY(-50%);
   width: 1px;
   height: 22px;
-  background: rgba(11, 30, 63, 0.1);
+  background: var(--border-subtle);
 }
 .tools-marquee__item:last-child::after {
   display: none;

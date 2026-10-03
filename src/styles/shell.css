@@ -132,16 +132,16 @@
 
 
 [data-theme='dark'] .tools-marquee {
-  --navy: #0B1E3F;
-  --navy-ink: #060C1A;
-  --muted: #5A6479;
-  --white: #FFFFFF;
-  --cream: #F4F4ED;
-  --paper: #FBFBF7;
-  --line: rgba(11, 30, 63, 0.14);
-  --line-strong: rgba(11, 30, 63, 0.28);
-  --divider: rgba(11, 30, 63, 0.12);
-  --tint: rgba(11, 30, 63, 0.05);
-  --tint-strong: rgba(11, 30, 63, 0.09);
-  --orange-ink: #B4490A;
+  --navy: var(--text-main);
+  --navy-ink: var(--accent-contrast);
+  --muted: var(--text-muted);
+  --white: var(--bg-tools);
+  --cream: var(--bg-app);
+  --paper: var(--bg-card);
+  --line: var(--border-subtle);
+  --line-strong: #334155;
+  --divider: var(--border-subtle);
+  --tint: var(--bg-card-hover);
+  --tint-strong: var(--bg-card-hover);
+  --orange-ink: #FDBA74;
 }

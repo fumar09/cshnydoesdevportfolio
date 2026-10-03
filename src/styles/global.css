@@ -36,8 +36,8 @@ body {
   font-family: var(--font-display);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  background: var(--cream);
-  color: var(--navy);
+  background: var(--bg-app);
+  color: var(--text-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -124,7 +124,7 @@ button {
 
 
 
-  background: var(--cream);
+  background: var(--bg-app);
 }
 
 main > * {

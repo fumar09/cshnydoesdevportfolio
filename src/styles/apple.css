@@ -188,14 +188,14 @@ body {
   .rail__link svg { opacity: 0.9; }
   .rail__link:hover {
     color: var(--navy);
-    background: var(--tint);
+    background: var(--bg-card-hover);
     transform: none;
     box-shadow: none;
   }
   .rail__link.active {
     color: var(--navy);
     font-weight: 600;
-    background: var(--tint-strong);
+    background: var(--bg-card-hover);
     box-shadow: none;
   }
   .rail__link.active svg { color: var(--orange); }
@@ -340,21 +340,11 @@ body {
   .rail::before { background: var(--paper); }
   .home__glass {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 38%),
+      linear-gradient(180deg, color-mix(in srgb, var(--text-main) 3%, transparent), transparent 38%),
       linear-gradient(100deg,
-        rgba(255, 255, 255, 0.97) 0%,
-        rgba(255, 255, 255, 0.93) 42%,
-        rgba(219, 231, 255, 0.95) 76%,
-        rgba(186, 209, 255, 0.96) 100%);
-  }
-  [data-theme='dark'] .home__glass {
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0) 38%),
-      linear-gradient(100deg,
-        rgba(16, 24, 42, 0.96) 0%,
-        rgba(16, 26, 48, 0.94) 42%,
-        rgba(18, 40, 96, 0.94) 76%,
-        rgba(24, 56, 140, 0.93) 100%);
+        var(--bg-card) 0%,
+        color-mix(in srgb, var(--bg-card) 60%, var(--bg-card-hover)) 54%,
+        var(--bg-card-hover) 100%);
   }
 }
 @media (prefers-contrast: more) {

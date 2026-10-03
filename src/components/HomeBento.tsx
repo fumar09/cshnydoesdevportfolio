@@ -57,6 +57,10 @@ export default function HomeBento() {
             ))}
           </div>
         </div>
+        <span className="bento__reel-pagination" aria-hidden="true">
+          {projectShots.map((_, index) => <span key={index} className="bento__reel-page" />)}
+          <span className="bento__reel-current" />
+        </span>
       </Link>
 
       <Link to="/about" className="bento__card bento__card--about">

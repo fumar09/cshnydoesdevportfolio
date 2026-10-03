@@ -46,6 +46,7 @@
 }
 .bento__card:hover {
   transform: translateY(-3px);
+  background: var(--bg-card-hover);
   border-color: var(--orange);
   box-shadow:
     0 1px 2px rgba(6, 12, 26, 0.05),
@@ -77,9 +78,9 @@
   width: 36px;
   height: 36px;
   border-radius: 11px;
-  background: var(--orange);
-  color: var(--white);
-  box-shadow: 0 8px 18px -10px rgba(255, 122, 26, 0.9);
+  background: var(--accent-subtle);
+  color: var(--accent-amber);
+  box-shadow: 0 8px 18px -10px color-mix(in srgb, var(--accent-amber) 55%, transparent);
   transition: transform var(--dur-med) var(--ease-spring);
 }
 .bento__card:hover .bento__icon { transform: translateY(-2px) rotate(-4deg); }
@@ -137,6 +138,46 @@
 }
 
 .bento__card:hover .bento__reel-track { animation-play-state: running; }
+
+.bento__reel-pagination {
+  position: absolute;
+  z-index: 3;
+  right: 16px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 7px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(8px);
+}
+.bento__reel-page,
+.bento__reel-current {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+.bento__reel-page { background: var(--text-muted); opacity: 0.45; }
+.bento__reel-current {
+  position: absolute;
+  top: 50%;
+  left: 7px;
+  background: var(--accent-amber);
+  transform: translateY(-50%);
+  animation: bento-reel-pagination 22s steps(1, end) infinite;
+  animation-play-state: paused;
+}
+.bento__card:hover .bento__reel-current { animation-play-state: running; }
+
+@keyframes bento-reel-pagination {
+  0%, 24.99% { transform: translate(0, -50%); }
+  25%, 49.99% { transform: translate(9px, -50%); }
+  50%, 74.99% { transform: translate(18px, -50%); }
+  75%, 100% { transform: translate(27px, -50%); }
+}
 
 
 .bento__shot {
@@ -353,7 +394,7 @@
   .bento__offer-note { display: block; }
 }
 .bento__card:hover .bento__offer { transform: translateX(3px); }
-.bento__card:hover .bento__offer-tile { background: var(--orange); color: var(--white); }
+.bento__card:hover .bento__offer-tile { background: var(--orange); color: var(--accent-contrast); }
 .bento__card:hover .bento__offer-num { color: var(--orange-ink); }
 
 
@@ -412,6 +453,7 @@
   }
   .bento__reel-track { flex-direction: row; width: max-content; animation-name: bento-drift-left; animation-duration: 26s; }
   .bento__shot { width: 200px; }
+  .bento__reel-current { animation-duration: 26s; }
 }
 @media (max-width: 639px) {
   .bento__card { padding: 14px; }
@@ -424,6 +466,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .bento__reel-track, .bento__chip-track, .bento__reviews-track { animation: none; }
+  .bento__reel-current { animation: none; transform: translateY(-50%); }
 }
 
 

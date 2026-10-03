@@ -245,13 +245,13 @@
   .rail__link.active .ricon__star-fill { opacity: 1; transform: scale(1); }
   .rail__link:hover {
     color: var(--navy);
-    background: var(--white);
+    background: var(--bg-card-hover);
     transform: translateX(3px);
   }
   .rail__link.active {
     color: var(--navy);
     font-weight: 600;
-    background: var(--white);
+    background: var(--bg-card-hover);
     box-shadow: inset 0 0 0 1px var(--line);
   }
   .rail__link.active svg { color: var(--orange); opacity: 1; }
