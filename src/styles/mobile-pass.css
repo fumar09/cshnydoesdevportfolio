@@ -91,7 +91,7 @@ html { -webkit-tap-highlight-color: transparent; }
   .home__tools-eyebrow { display: none; }
   .home__tools-label {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -0.02em;
     line-height: 1.2;
     color: var(--navy);

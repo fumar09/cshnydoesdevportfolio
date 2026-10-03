@@ -41,7 +41,7 @@
 .home__title {
   display: flex;
   flex-direction: column;
-  font-size: clamp(30px, 3.5vw, 72px);
+  font-size: clamp(36px, 3.5vw, 48px);
   font-weight: 700;
   letter-spacing: var(--ls-display);
   line-height: 1.06;
@@ -163,15 +163,15 @@
 }
 .home__tools-head { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .home__tools-eyebrow {
-  font-size: var(--fs-eyebrow);
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: var(--ls-eyebrow);
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--orange-ink);
 }
 .home__tools-label {
-  font-size: clamp(15px, 1.15vw, 20px);
-  font-weight: 700;
+  font-size: clamp(16px, 1.15vw, 19px);
+  font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.15;
   color: var(--navy);

@@ -86,18 +86,18 @@
 .bento__card:hover .bento__icon { transform: translateY(-2px) rotate(-4deg); }
 .bento__title {
   font-family: var(--font-display);
-  font-size: clamp(15px, 1.05vw, 18px);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: clamp(17px, 1.25vw, 19px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+  text-transform: none;
   color: var(--navy);
   transition: color var(--dur-fast) var(--ease-out);
 }
 .bento__card:hover .bento__title { color: var(--orange-ink); }
 .bento__desc {
-  font-size: clamp(11.5px, 0.74vw, 13px);
-  line-height: 1.4;
+  font-size: clamp(13px, 0.9vw, 14px);
+  line-height: 1.5;
   color: var(--muted);
 }
 .bento__arrow {
@@ -312,8 +312,11 @@
   border-radius: var(--radius-pill);
   background: var(--navy);
   color: var(--cream);
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 11.5px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 .bento__badge-tag svg { color: var(--verified); }
 
@@ -382,7 +385,7 @@
 }
 .bento__offer-num {
   flex: none;
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
   font-size: clamp(9.5px, 5.5cqh, 11px);
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -432,7 +435,13 @@
 .bento__review-top img { width: 18px; height: 18px; border-radius: 5px; object-fit: contain; }
 .bento__review-top svg { color: var(--orange); }
 .bento__review-role { font-size: 11.5px; line-height: 1.4; color: var(--muted); }
-.bento__review-work { font-size: 11px; font-weight: 600; color: var(--orange-ink); }
+.bento__review-work {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--orange-ink);
+}
 
 
 

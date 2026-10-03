@@ -87,17 +87,18 @@ body {
   text-transform: none;
   letter-spacing: -0.012em;
   font-weight: 600;
-  font-size: clamp(16px, 1.15vw, 19px);
+  font-size: clamp(17px, 1.25vw, 19px);
   line-height: 1.15;
 }
 .bento__desc {
+  font-size: clamp(13px, 0.9vw, 14px);
   letter-spacing: 0.004em;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 .bento__offer-title { letter-spacing: 0; }
 .bento__offer-num,
 .bento__review-work,
-.bento__badge-tag,
+.bento__badge-tag { letter-spacing: 0.04em; }
 .bento__chip { letter-spacing: 0.01em; }
 .rail__handle,
 .rail__copy { letter-spacing: 0.004em; }
