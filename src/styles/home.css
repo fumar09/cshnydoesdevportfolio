@@ -14,9 +14,9 @@
 
 @media (min-width: 1100px) {
   .home {
-    height: 100%;
+    height: auto;
     display: grid;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto auto;
     min-height: 0;
 
 
@@ -152,7 +152,11 @@
     0 30px 70px -40px rgba(0, 0, 0, 0.8);
 }
 @media (min-width: 1100px) {
-  .home__glass--showcase { height: 100%; display: grid; grid-template-rows: minmax(0, 1fr); }
+  .home__glass--showcase {
+    height: clamp(520px, 62vh, 620px);
+    display: grid;
+    grid-template-rows: minmax(0, 1fr);
+  }
 }
 
 

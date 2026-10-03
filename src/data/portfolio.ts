@@ -23,7 +23,6 @@ export const portfolioProjects: PortfolioProject[] = [
     image: '/images/e-barangay-preview.jpg',
     imageAlt: 'Preview of the E-Barangay ni Kap interface',
     tags: ['Service flows', 'Resident access', 'Community services'],
-    outcome: 'My resume reports an approximately 30% increase in user satisfaction.',
   },
   {
     id: 'archivia',
@@ -58,7 +57,6 @@ export const portfolioProjects: PortfolioProject[] = [
     image: '/images/resumay-preview.png',
     imageAlt: 'Preview of the ResuMay ATS Resume Optimizer interface',
     tags: ['ATS scoring', 'Resume optimization', 'PDF export'],
-    outcome: 'My portfolio reports an approximately 25% reduction in load times.',
     href: 'https://resumaybuilder.vercel.app/',
   },
 ]
